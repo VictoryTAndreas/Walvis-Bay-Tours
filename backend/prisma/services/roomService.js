@@ -83,6 +83,7 @@ export const getAllplans = async (viewerId) => {
   return await prisma.travelPlan.findMany({
     include: {
       user: true, // creator of the plan
+
       members: {
         select: {
           user: {
@@ -91,12 +92,22 @@ export const getAllplans = async (viewerId) => {
               name: true,
               profileImage: true,
               Address: true,
-              Friend: {
-                where : {
-                  friendId : viewerId
+
+              // Check if viewer and this user are friends
+              receivedRequests: {
+                where: {
+                  senderId: viewerId,
+                 
                 },
-                select : { user : true}
-              }
+                select: { id: true,  isAccepted: true }
+              },
+
+              sentRequests: {
+                where: {
+                  receiverId: viewerId
+                },
+                select: { id: true ,  isAccepted: true}
+              },
             },
           },
         },
@@ -104,3 +115,4 @@ export const getAllplans = async (viewerId) => {
     },
   });
 };
+

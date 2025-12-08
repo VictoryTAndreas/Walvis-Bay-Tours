@@ -5,6 +5,7 @@ import http from 'http'
 import route from "./index.js";
 import { createClient } from "@supabase/supabase-js";
 import { setupWebSocket } from "./websocket.js";
+import config from './config/index.js'
 
 const app = express();
 
@@ -28,6 +29,9 @@ const server = http.createServer(app);
 
 setupWebSocket(server);
 
-server.listen(3000, () => {
+
+const PORT = config.PORT
+
+server.listen(PORT, () => {
   console.log("backend is running on port 3000");
 });

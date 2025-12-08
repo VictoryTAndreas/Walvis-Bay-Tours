@@ -155,8 +155,8 @@ export const updateProfile = async (req, res) => {
     if (image_url) {
       userdata.profileImage = image_url;
     }
-    const response = await UserService.updateProfile(userdata, userId);
-
+    await UserService.updateProfile(userdata, userId);
+    const response = await UserService.getMyinformation(userId);
     res.status(200).json({
       data: response,
     });
