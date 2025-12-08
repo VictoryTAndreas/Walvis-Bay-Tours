@@ -16,13 +16,14 @@ import ExpBlog from "./component/ExperiencePage/ExpBlog";
 import CurrentPlans from "./component/ui/TravelPlan";
 import MainLayout from "./component/MainLayout";
 import ChatPage from "./component/Chat/ChatPage";
-import { CreateTrip } from "./component/createTrip";
+import { CreateTrip } from "./component/CreateTrip";
 import { EditProfile } from "./component/EditProfle";
 
 function App() {
   return (
     <>
       {/* <Navbar /> */}
+      
       <ToastContainer position="bottom-right" autoClose={1000} />
       <Routes>
         <Route path="/signin" element={<SignIn />} />
