@@ -7,14 +7,12 @@ import {
   Banknote,
   Star,
   Map,
-  CheckCircle2,
   ArrowRight,
 } from "lucide-react";
 import useInView from "../hook/useInView";
 import "swiper/css";
 import "swiper/css/navigation";
 import img7 from "../assets/img7.jpg";
-import img8 from "../assets/img8.jpg";
 import bgV from "../assets/bgV.mp4";
 import { Link } from "react-router-dom";
 

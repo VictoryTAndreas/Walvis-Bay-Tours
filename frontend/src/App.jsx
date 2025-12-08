@@ -1,5 +1,4 @@
 import { Routes, Route, Navigate } from "react-router-dom";
-import { useState } from "react";
 import Home from "./component/Home";
 import FindTravelMate from "./component/FindTravelMate";
 import SignIn from "./component/SignIn";
@@ -11,12 +10,14 @@ import CurrentPlan from "./component/Dashboard/CurrentPlan";
 import DashboardLayout from "./component/Dashboard/DashboardLayout";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import MessengerUI from "./component/chatInerface/ChatInterface";
 import OffersPage from "./component/OfferPage";
 import Experience from "./component/ExperiencePage/Experience";
 import ExpBlog from "./component/ExperiencePage/ExpBlog";
-import CurrentPlans from "./component/ui/TravelPlan";;
+import CurrentPlans from "./component/ui/TravelPlan";
 import MainLayout from "./component/MainLayout";
+import ChatPage from "./component/Chat/ChatPage";
+import { CreateTrip } from "./component/createTrip";
+import { EditProfile } from "./component/EditProfle";
 
 function App() {
   return (
@@ -24,19 +25,19 @@ function App() {
       {/* <Navbar /> */}
       <ToastContainer position="bottom-right" autoClose={1000} />
       <Routes>
-       
         <Route path="/signin" element={<SignIn />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/" element={<MainLayout />}>
           <Route path="/" element={<Home />} />
           <Route path="/find-travel-mate" element={<FindTravelMate />} />
-          <Route path="/chat" element={<MessengerUI />} />
           <Route path="/offers" element={<OffersPage />} />
           <Route path="/experience" element={<Experience />} />
           <Route path="/experience/:slug" element={<ExpBlog />} />
           <Route path="/currentPlan" element={<CurrentPlans />} />
         </Route>
-
+        <Route path="/chat" element={<ChatPage />} />
+        <Route path="/editProfile" element={<EditProfile />} />
+        <Route path="/tripCreate" element={<CreateTrip />} />
         <Route path="/Dashboard" element={<DashboardLayout />}>
           <Route index element={<Navigate to="profile" />} />
           <Route path="profile" element={<Profile />} />
@@ -46,7 +47,6 @@ function App() {
         </Route>
       </Routes>
 
-      {/* <Footer /> */}
     </>
   );
 }

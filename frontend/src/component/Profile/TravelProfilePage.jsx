@@ -1,21 +1,27 @@
-import React, { useState } from 'react';
-import { Edit3, Camera, MessageCircle, Award, Compass, Mountain } from 'lucide-react';
+import React, { useState } from "react";
+import {
+  Edit3,
+  Camera,
+  MessageCircle,
+  Award,
+  Compass,
+  Mountain,
+} from "lucide-react";
 
 const TravelProfilePage = () => {
-  const [activeTab, setActiveTab] = useState('overview');
+  const [activeTab, setActiveTab] = useState("overview");
 
   const tabs = [
-    { id: 'overview', label: 'Overview', icon: Compass },
-    { id: 'reviews', label: 'Reviews', icon: MessageCircle },
-    { id: 'achievements', label: 'Achievements', icon: Award },
+    { id: "overview", label: "Overview", icon: Compass },
+    { id: "reviews", label: "Reviews", icon: MessageCircle },
+    { id: "achievements", label: "Achievements", icon: Award },
   ];
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-gray-900 to-slate-800">
       <div className="max-w-5xl mx-auto px-4 py-6">
-
         {/* Header Profile */}
-         <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-emerald-600 via-teal-600 to-green-600 p-6 text-white shadow-2xl shadow-emerald-500/25 mb-6">
+        <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-emerald-600 via-teal-600 to-green-600 p-6 text-white shadow-2xl shadow-emerald-500/25 mb-6">
           <div className="absolute inset-0 bg-black/20"></div>
           <div className="absolute top-2 right-2 opacity-10">
             <Compass className="w-20 h-20 transform rotate-12" />
@@ -32,14 +38,16 @@ const TravelProfilePage = () => {
                 <Camera className="w-3 h-3" />
               </button>
             </div>
-              {/* Info */}
+            {/* Info */}
             <div className="flex-1">
               <h1 className="text-2xl font-bold mb-1">Traveler Name</h1>
               <div className="flex items-center space-x-3 text-white/90 text-sm mb-2">
                 <span>🎂 Age</span>
                 <span>📍 Location</span>
               </div>
-              <p className="text-white/95 mb-2">Short traveler bio goes here...</p>
+              <p className="text-white/95 mb-2">
+                Short traveler bio goes here...
+              </p>
               <p className="text-white/70 text-sm">Joined Year</p>
 
               <div className="grid grid-cols-3 gap-3 mt-4">
@@ -69,14 +77,16 @@ const TravelProfilePage = () => {
         {/* Navigation Tabs */}
         <div className="bg-slate-900/80 backdrop-blur-2xl rounded-2xl shadow-xl border border-emerald-500/20 mb-6 overflow-hidden">
           <div className="flex">
-            {tabs.map(tab => (
+            {tabs.map((tab) => (
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
                 className={`flex-1 flex items-center justify-center space-x-2 px-4 py-3 font-semibold text-sm transition-all
-                  ${activeTab === tab.id
-                    ? 'text-emerald-300 bg-emerald-500/10'
-                    : 'text-gray-300 hover:text-emerald-300 hover:bg-emerald-500/10'}`}
+                  ${
+                    activeTab === tab.id
+                      ? "text-emerald-300 bg-emerald-500/10"
+                      : "text-gray-300 hover:text-emerald-300 hover:bg-emerald-500/10"
+                  }`}
               >
                 <tab.icon className="w-4 h-4" />
                 <span className="hidden sm:inline">{tab.label}</span>
@@ -85,9 +95,8 @@ const TravelProfilePage = () => {
           </div>
         </div>
 
-
         {/*overview, review & achievements*/}
-        {activeTab === 'overview' && (
+        {activeTab === "overview" && (
           <div className="bg-gradient-to-br from-slate-900/80 via-gray-900/80 to-slate-800/80 backdrop-blur-xl rounded-2xl p-8 border border-emerald-500/10 shadow-xl mb-6">
             <div className="flex items-center justify-between mb-8">
               <div className="flex items-center space-x-3">
@@ -98,7 +107,9 @@ const TravelProfilePage = () => {
                   Recent Journeys
                 </h3>
               </div>
-              <div className="text-xs text-gray-400 font-medium">Latest Updates</div>
+              <div className="text-xs text-gray-400 font-medium">
+                Latest Updates
+              </div>
             </div>
 
             {/* Journey Card */}
@@ -111,33 +122,41 @@ const TravelProfilePage = () => {
                       <div className="w-10 h-10 bg-gradient-to-br from-emerald-500/20 to-teal-500/20 rounded-lg flex items-center justify-center text-lg border border-emerald-400/20">
                         🌍
                       </div>
-                      <h4 className="text-white font-semibold text-lg">Sample Place</h4>
+                      <h4 className="text-white font-semibold text-lg">
+                        Sample Place
+                      </h4>
                     </div>
                     <span className="text-xs text-gray-400 bg-white/5 px-2 py-1 rounded-full">
                       Sample Time
                     </span>
                   </div>
-                  <p className="text-sm text-emerald-300 italic">Sample journey action or description</p>
+                  <p className="text-sm text-emerald-300 italic">
+                    Sample journey action or description
+                  </p>
                 </div>
               </div>
             </div>
           </div>
         )}
 
-        {activeTab === 'reviews' && (
+        {activeTab === "reviews" && (
           <div className="bg-slate-800/70 rounded-2xl p-6 mb-6 border border-white/10 shadow-xl">
             <h3 className="text-xl font-semibold text-white mb-4 flex items-center space-x-2">
               <MessageCircle className="w-5 h-5 text-emerald-400" />
               <span>Traveler Reviews</span>
             </h3>
             <div className="bg-slate-900/50 rounded-xl p-4 text-white/80">
-              <p className="italic">"Amazing adventure, unforgettable experience!"</p>
-              <div className="text-sm text-right text-gray-400 mt-2">– Reviewer Name</div>
+              <p className="italic">
+                "Amazing adventure, unforgettable experience!"
+              </p>
+              <div className="text-sm text-right text-gray-400 mt-2">
+                – Reviewer Name
+              </div>
             </div>
           </div>
         )}
 
-        {activeTab === 'achievements' && (
+        {activeTab === "achievements" && (
           <div className="bg-slate-800/70 rounded-2xl p-6 mb-6 border border-white/10 shadow-xl">
             <h3 className="text-xl font-semibold text-white mb-4 flex items-center space-x-2">
               <Award className="w-5 h-5 text-yellow-400" />
@@ -145,7 +164,9 @@ const TravelProfilePage = () => {
             </h3>
             <div className="bg-slate-900/50 rounded-xl p-4 text-white/90">
               <p className="font-semibold">🌟 Top Explorer Badge</p>
-              <p className="text-sm text-gray-400">Awarded for exploring 10+ countries.</p>
+              <p className="text-sm text-gray-400">
+                Awarded for exploring 10+ countries.
+              </p>
             </div>
           </div>
         )}
