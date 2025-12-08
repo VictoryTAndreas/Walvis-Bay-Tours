@@ -1,3 +1,4 @@
+import axios from "axios";
 import {
   MapPin,
   Calendar,
@@ -11,7 +12,16 @@ import {
   Heart,
   MessageCircle,
   CheckCircle,
+  MessageCircleCodeIcon,
+  MessageCircleCode,
+  SendToBackIcon,
+  Send,
+  GitPullRequest,
+  UserCircle,
+  Users2Icon,
 } from "lucide-react";
+
+import { toast } from "react-toastify";
 
 const TravelPlanDetailsModal = ({ plan, isOpen, onClose }) => {
   if (!isOpen) return null;
@@ -22,6 +32,21 @@ const TravelPlanDetailsModal = ({ plan, isOpen, onClose }) => {
       month: "long",
       year: "numeric",
     });
+  };
+  const token = localStorage.getItem("token");
+
+  const sendRequest = async (receiverId) => {
+    try {
+      const response = await axios.post(
+        `${import.meta.env.VITE_API_URL}/friend/${receiverId}`,
+        {},
+        { headers: { authorization: token } }
+      );
+
+      if (response) toast.success("Friend request send succfully");
+    } catch (error) {
+      toast.success("Something went wrong !!!");
+    }
   };
 
   const getInitials = (name) =>
@@ -258,23 +283,66 @@ const TravelPlanDetailsModal = ({ plan, isOpen, onClose }) => {
                   return (
                     <div
                       key={ind}
-                      className="flex items-center justify-between p-4 bg-white rounded-xl border border-stone-200 hover:border-orange-300 hover:shadow-md transition-all"
+                      className="flex items-center justify-between  p-4 bg-white rounded-xl border border-stone-200 hover:border-orange-300 hover:shadow-md transition-all"
                     >
-                      <div className="flex items-center gap-3">
-                        <div className="bg-gradient-to-br from-orange-400 to-orange-600 border-2 border-orange-200 rounded-full text-white w-12 h-12 flex justify-center items-center font-bold shadow-md">
-                          {getInitials(member.user?.name || "")}
-                        </div>
-                        <div>
-                          <p className="font-semibold text-stone-900">
-                            {member.user?.name}
-                          </p>
-                          {member.user?.Address?.city && (
-                            <p className="text-xs text-stone-500">
-                              From {member.user.Address.city}
+                      <div className="flex items-center justify-between w-full py-2">
+                        {/* LEFT SIDE — Profile + Name */}
+                        <div className="flex items-center gap-3">
+                          <div className="bg-gradient-to-br from-orange-400 to-orange-600 border-2 border-orange-200 rounded-full text-white w-12 h-12 flex justify-center items-center font-bold shadow-md">
+                            {getInitials(member.user?.name || "")}
+                          </div>
+
+                          <div>
+                            <p className="font-semibold text-stone-900">
+                              {member.user?.name}
                             </p>
-                          )}
+                            {member.user?.Address?.city && (
+                              <p className="text-xs text-stone-500">
+                                From {member.user.Address.city}
+                              </p>
+                            )}
+                          </div>
                         </div>
+
+                        {/* RIGHT SIDE — Buttons */}
+                        {(() => {
+                          const received = member?.user?.receivedRequests ?? [];
+                          const sent = member?.user?.sentRequests ?? [];
+
+                          const isFriend =
+                            received.some((r) => r.isAccepted) ||
+                            sent.some((r) => r.isAccepted);
+
+                          const isPending =
+                            received.length > 0 || sent.length > 0;
+
+                          if (isFriend) {
+                            return (
+                              <button className="bg-green-500 rounded p-4 hover:scale-110 transition duration-300">
+                                <Users2Icon />
+                              </button>
+                            );
+                          }
+
+                          if (isPending) {
+                            return (
+                              <button className="bg-orange-500 p-4 rounded hover:scale-110 transition duration-300">
+                                Pending
+                              </button>
+                            );
+                          }
+
+                          return (
+                            <button
+                              className="bg-green-500  p-4 rounded hover:scale-110 transition duration-300"
+                              onClick={() => sendRequest(member.user.id)}
+                            >
+                              <Send />
+                            </button>
+                          );
+                        })()}
                       </div>
+
                       {status === "accepted" && (
                         <div className="flex items-center gap-2 px-3 py-1.5 bg-green-100 rounded-full">
                           <CheckCircle size={14} className="text-green-600" />
@@ -318,7 +386,7 @@ const TravelPlanDetailsModal = ({ plan, isOpen, onClose }) => {
             </button>
             <button
               onClick={onClose}
-              className="flex-1 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-bold px-4 py-3 rounded-xl transition-all shadow-lg hover:shadow-xl"
+              className="flex-1 bg-linear-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-bold px-4 py-3 rounded-xl transition-all shadow-lg hover:shadow-xl"
             >
               Close
             </button>

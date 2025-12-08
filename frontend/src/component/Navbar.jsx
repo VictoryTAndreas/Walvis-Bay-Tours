@@ -106,14 +106,20 @@ const Navbar = () => {
           className="md:hidden p-2 text-stone-200 hover:text-white transition-colors"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
         >
-          {isMobileMenuOpen ? <X className="h-7 w-7" /> : <Menu className="h-7 w-7" />}
+          {isMobileMenuOpen ? (
+            <X className="h-7 w-7" />
+          ) : (
+            <Menu className="h-7 w-7" />
+          )}
         </button>
       </div>
 
       {/* --- MOBILE MENU WRAPPER --- */}
       <div
         className={`md:hidden overflow-hidden transition-all duration-500 ease-in-out ${
-          isMobileMenuOpen ? "max-h-[500px] opacity-100 mt-6 pb-4" : "max-h-0 opacity-0"
+          isMobileMenuOpen
+            ? "max-h-[500px] opacity-100 mt-6 pb-4"
+            : "max-h-0 opacity-0"
         }`}
       >
         <div className="flex flex-col gap-2">

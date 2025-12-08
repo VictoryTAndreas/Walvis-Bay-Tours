@@ -1,5 +1,10 @@
 import React from "react";
-import { User, Mail, Contact, MapPin, Globe, Star, MessageCircleCode } from "lucide-react"
+import {
+  User,
+  Mail,
+  MapPin,
+  Globe,
+} from "lucide-react";
 
 const getInitials = (name) =>
   name
@@ -7,11 +12,19 @@ const getInitials = (name) =>
     .map((n) => n[0])
     .join("");
 
-const FriendCard = ({ user  , message , handelrequest}) => {
-  console.log(user.name)
-  function handelOnclick(){
-      handelrequest(user.id)
-  }
+const FriendCard = ({
+  user,
+  conversationId,
+  message,
+  handelrequest,
+  ChatHandler,
+}) => {
+
+ 
+  const handelOnclick = () => {
+    ChatHandler(conversationId);
+    handelrequest(user.id);
+  };
   return (
     <div className="group relative">
       <div className="relative bg-white shadow-lg rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 border border-gray-100">
@@ -29,10 +42,14 @@ const FriendCard = ({ user  , message , handelrequest}) => {
             </div>
 
             <div className="flex-1 min-w-0">
-              <h3 className="text-xl font-bold text-white mb-1 truncate">{user.name}</h3>
+              <h3 className="text-xl font-bold text-white mb-1 truncate">
+                {user.name}
+              </h3>
               <div className="flex items-center gap-2 text-white/90">
                 <MapPin className="w-4 h-4" />
-                <span className="text-sm">{user.Address?.city || "Unknown Location"}</span>
+                <span className="text-sm">
+                  {user.Address?.city || "Unknown Location"}
+                </span>
               </div>
             </div>
           </div>
@@ -54,17 +71,25 @@ const FriendCard = ({ user  , message , handelrequest}) => {
             <div className="bg-gray-50 rounded-lg p-3">
               <div className="flex items-center gap-2 mb-1">
                 <Globe className="w-4 h-4 text-orange-500" />
-                <span className="text-xs font-medium text-stone-600 uppercase tracking-wide">Country</span>
+                <span className="text-xs font-medium text-stone-600 uppercase tracking-wide">
+                  Country
+                </span>
               </div>
-              <p className="text-stone-900 font-semibold">{user.Address?.country || "N/A"}</p>
+              <p className="text-stone-900 font-semibold">
+                {user.Address?.country || "N/A"}
+              </p>
             </div>
 
             <div className="bg-gray-50 rounded-lg p-3">
               <div className="flex items-center gap-2 mb-1">
                 <MapPin className="w-4 h-4 text-orange-500" />
-                <span className="text-xs font-medium text-stone-600 uppercase tracking-wide">Pincode</span>
+                <span className="text-xs font-medium text-stone-600 uppercase tracking-wide">
+                  Pincode
+                </span>
               </div>
-              <p className="text-stone-900 font-semibold">{user.Address?.pincode || "N/A"}</p>
+              <p className="text-stone-900 font-semibold">
+                {user.Address?.pincode || "N/A"}
+              </p>
             </div>
           </div>
 

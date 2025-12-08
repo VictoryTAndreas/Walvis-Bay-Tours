@@ -14,7 +14,7 @@ import {
 } from "lucide-react";
 import TravelPlanDetailsModal from "./TravelPlanDetailsModal";
 
-const EnhancedTravelPlan = ({ plan, JoinPlan, msg, OpenMemberPage }) => {
+const EnhancedTravelPlan = ({ plan, handlePlan, msg, OpenMemberPage }) => {
   const [isDetailsOpen, setIsDetailsOpen] = useState(false);
 
   const formatDate = (dateString) =>
@@ -34,7 +34,7 @@ const EnhancedTravelPlan = ({ plan, JoinPlan, msg, OpenMemberPage }) => {
       : "";
 
   const HandleJoinPlan = () => {
-    JoinPlan(plan.id);
+    handlePlan(plan.id);
   };
 
   const getMemberStatus = (member) => {
@@ -130,7 +130,9 @@ const EnhancedTravelPlan = ({ plan, JoinPlan, msg, OpenMemberPage }) => {
           <div className="grid grid-cols-3 gap-3">
             <div className="bg-gradient-to-br from-orange-50 to-orange-100 rounded-xl p-3 border border-orange-200">
               <div className="flex flex-col items-center text-center">
-                <div className="bg-orange-500 rounded-lg p-2 mb-2">{getCategoryIcon()}</div>
+                <div className="bg-orange-500 rounded-lg p-2 mb-2">
+                  {getCategoryIcon()}
+                </div>
                 <p className="text-xs text-stone-500 font-medium">Category</p>
                 <p className="text-xs font-bold text-stone-900 mt-0.5 truncate">
                   {plan.Categories || "—"}
@@ -178,7 +180,9 @@ const EnhancedTravelPlan = ({ plan, JoinPlan, msg, OpenMemberPage }) => {
                   <CalendarDays size={16} className="text-white" />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className="text-xs text-stone-500 font-medium">Travel Date</p>
+                  <p className="text-xs text-stone-500 font-medium">
+                    Travel Date
+                  </p>
                   <p className="text-sm font-bold text-stone-900 mt-0.5 truncate">
                     {plan.travelDate ? formatDate(plan.travelDate) : "—"}
                   </p>
@@ -192,7 +196,9 @@ const EnhancedTravelPlan = ({ plan, JoinPlan, msg, OpenMemberPage }) => {
                   <Clock size={16} className="text-white" />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className="text-xs text-stone-500 font-medium">Time Slot</p>
+                  <p className="text-xs text-stone-500 font-medium">
+                    Time Slot
+                  </p>
                   <p className="text-sm font-bold text-stone-900 mt-0.5 truncate">
                     {plan.timeSlot || "—"}
                   </p>
@@ -211,14 +217,16 @@ const EnhancedTravelPlan = ({ plan, JoinPlan, msg, OpenMemberPage }) => {
                 </span>
               </div>
               <div className="flex flex-wrap gap-2">
-                {getMemberCities().slice(0, 4).map((city, idx) => (
-                  <span
-                    key={idx}
-                    className="px-3 py-1 bg-gradient-to-r from-orange-100 to-orange-200 text-orange-800 text-xs rounded-full font-semibold border border-orange-300 shadow-sm"
-                  >
-                    {city}
-                  </span>
-                ))}
+                {getMemberCities()
+                  .slice(0, 4)
+                  .map((city, idx) => (
+                    <span
+                      key={idx}
+                      className="px-3 py-1 bg-gradient-to-r from-orange-100 to-orange-200 text-orange-800 text-xs rounded-full font-semibold border border-orange-300 shadow-sm"
+                    >
+                      {city}
+                    </span>
+                  ))}
                 {getMemberCities().length > 4 && (
                   <span className="px-3 py-1 bg-stone-200 text-stone-700 text-xs rounded-full font-semibold">
                     +{getMemberCities().length - 4} more
@@ -228,67 +236,6 @@ const EnhancedTravelPlan = ({ plan, JoinPlan, msg, OpenMemberPage }) => {
             </div>
           )}
 
-          {/* Travel Buddies */}
-          {/* <div className="space-y-3">
-            <div className="flex items-center justify-between">
-              <span className="text-xs font-semibold text-stone-700 uppercase tracking-wide">
-                Travel Buddies
-              </span>
-              <span className="text-xs text-stone-500">
-                by{" "}
-                <span className="font-semibold text-orange-600">
-                  {plan.user?.name || "—"}
-                </span>
-              </span>
-            </div>
-
-            <button
-              type="button"
-              className="w-full bg-stone-50 hover:bg-stone-100 rounded-xl p-3 transition-all duration-200 group/members border border-stone-200"
-              onClick={OpenMemberPage}
-            >
-              <div className="flex items-center justify-between">
-                <div className="flex -space-x-3">
-                  {plan.members && plan.members.length > 0 ? (
-                    <>
-                      {plan.members.slice(0, 5).map((member, i) => {
-                        const status = getMemberStatus(member);
-                        return (
-                          <div key={i} className="relative">
-                            <div className="bg-gradient-to-br from-orange-400 to-orange-600 border-2 border-white rounded-full text-white w-10 h-10 flex justify-center items-center font-bold text-sm shadow-lg">
-                              {getInitials(member.user?.name || "")}
-                            </div>
-                            {status === "accepted" && (
-                              <div className="absolute -bottom-0.5 -right-0.5 bg-green-500 rounded-full p-0.5 border-2 border-white">
-                                <CheckCircle size={10} className="text-white" />
-                              </div>
-                            )}
-                            {status === "pending" && (
-                              <div className="absolute -bottom-0.5 -right-0.5 bg-yellow-500 rounded-full p-0.5 border-2 border-white">
-                                <Clock size={10} className="text-white" />
-                              </div>
-                            )}
-                          </div>
-                        );
-                      })}
-                      {plan.members.length > 5 && (
-                        <div className="bg-stone-400 border-2 border-white rounded-full text-white w-10 h-10 flex justify-center items-center font-bold text-xs shadow-lg">
-                          +{plan.members.length - 5}
-                        </div>
-                      )}
-                    </>
-                  ) : (
-                    <div className="text-stone-500 text-sm font-medium">No members yet</div>
-                  )}
-                </div>
-                <ArrowRight
-                  size={18}
-                  className="text-stone-400 group-hover/members:text-orange-500 transition-all"
-                />
-              </div>
-            </button>
-          </div> */}
-
           {/* Action Buttons — keep them at the bottom */}
           <div className="flex gap-3 pt-2 mt-auto">
             <button
@@ -296,7 +243,10 @@ const EnhancedTravelPlan = ({ plan, JoinPlan, msg, OpenMemberPage }) => {
               onClick={() => setIsDetailsOpen(true)}
               className="flex-1 bg-white hover:bg-stone-50 text-stone-700 font-semibold py-3 px-4 rounded-xl transition-all duration-200 flex items-center justify-center gap-2 border-2 border-stone-200 hover:border-orange-300"
             >
-              <Star size={16} className="text-stone-500 group-hover/details:text-orange-500" />
+              <Star
+                size={16}
+                className="text-stone-500 group-hover/details:text-orange-500"
+              />
               <span>Details</span>
             </button>
 

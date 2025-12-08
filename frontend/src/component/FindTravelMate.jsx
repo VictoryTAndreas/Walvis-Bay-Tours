@@ -29,7 +29,6 @@ const FindTravelmate = () => {
   const [memberPage, setmemberPage] = useState(false);
   const [members, setMemberData] = useState([]);
   const [isPlan, setCurPlan] = useState(true);
-  const [isFilterExpanded, setFilterExpanded] = useState(false); // For mobile
 
   const { user, loading } = useAuth();
   const navigate = useNavigate();
@@ -242,34 +241,43 @@ const FindTravelmate = () => {
           <span>Showing {plan.length} active trips</span>
           {/* You could add a sort dropdown here */}
         </div>
- <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-fr">
-        {plan.length > 0 ? (
-          plan.map((p, idx) => (
-            // wrapper ensures centering; h-full to let card stretch
-            <div key={idx} className="flex justify-center h-full min-w-0">
-              <div className="w-full max-w-[440px]"> {/* optional max width for nicer columns */}
-                <EnhancedTravelPlan
-                  plan={p}
-                  JoinPlan={HandleJoinPlan}
-                  msg={"Join Plan"}
-                  OpenMemberPage={() => OpenMemberPage(p)}
-                />
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-fr">
+          {plan.length > 0 ? (
+            plan.map((p, idx) => (
+              // wrapper ensures centering; h-full to let card stretch
+              <div key={idx} className="flex justify-center h-full min-w-0">
+                <div className="w-full max-w-[440px]">
+                  {" "}
+                  {/* optional max width for nicer columns */}
+                  <EnhancedTravelPlan
+                    plan={p}
+                    handlePlan={HandleJoinPlan}
+                    msg={"Join Plan"}
+                    OpenMemberPage={() => OpenMemberPage(p)}
+                  />
+                </div>
               </div>
+            ))
+          ) : (
+            <div className="col-span-full py-20 text-center">
+              <div className="w-16 h-16 bg-stone-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Filter size={24} className="text-stone-400" />
+              </div>
+              <h3 className="text-lg font-semibold text-stone-900">
+                No plans found
+              </h3>
+              <p className="text-stone-500">
+                Try adjusting your filters to see more results.
+              </p>
+              <button
+                onClick={handleReset}
+                className="mt-4 text-orange-600 font-medium hover:underline"
+              >
+                Clear all filters
+              </button>
             </div>
-          ))
-        ) : (
-          <div className="col-span-full py-20 text-center">
-            <div className="w-16 h-16 bg-stone-100 rounded-full flex items-center justify-center mx-auto mb-4">
-              <Filter size={24} className="text-stone-400" />
-            </div>
-            <h3 className="text-lg font-semibold text-stone-900">No plans found</h3>
-            <p className="text-stone-500">Try adjusting your filters to see more results.</p>
-            <button onClick={handleReset} className="mt-4 text-orange-600 font-medium hover:underline">
-              Clear all filters
-            </button>
-          </div>
-        )}
-      </div>
+          )}
+        </div>
       </div>
 
       {/* --- Member Modal --- */}
