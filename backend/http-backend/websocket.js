@@ -91,9 +91,7 @@ export function setupWebSocket(server) {
       }
     });
 
-    socket.on("close", () => {
-      console.log(`User ${socket.userId} disconnected`);
-    });
+    socket.on("close", () => {});
   });
 }
 
@@ -104,7 +102,6 @@ function broadcastToConversation(wss, conversationId, payload, senderId) {
   wss.clients.forEach((client) => {
     if (client.readyState === WebSocket.OPEN) {
       // If client joined same conversation
-      console.log(client.currentConversationId);
       if (
         client.currentConversationId === conversationId &&
         client.userId !== senderId

@@ -10,9 +10,23 @@ import {
 
 function parseData(req, res, next) {
   if (req.body.data) {
-    try {
-      const parse = JSON.parse(req.body.data);
-      req.body = parse;
+   try {
+    const parsed = JSON.parse(req.body.data);
+    // merge parsed JSON into req.body but KEEP existing fields
+    req.body = {
+      ...req.body,
+      ...parsed,
+    };
+
+    // convert numeric fields
+    ["minAge", "maxAge", "grpSize"].forEach((key) => {
+      // convert only if exists AND is a number-like string
+      if (req.body[key] !== undefined && !isNaN(req.body[key])) {
+        req.body[key] = Number(req.body[key]);
+      }
+    });
+
+    delete req.body.data; // remove original string
     } catch (e) {
       return res
         .status(400)

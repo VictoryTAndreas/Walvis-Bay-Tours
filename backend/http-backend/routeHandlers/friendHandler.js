@@ -7,6 +7,11 @@ export const addFriend = async (req, res) => {
 
     if (!receiverId) res.status(401).json({ msg: "Something is missing" });
 
+    if (senderId === receiverId) {
+      res.status(200).json({ mag: "U are already friend" });
+      return;
+    }
+
     await friendServices.addFriend(senderId, receiverId);
 
     res.status(200).json({

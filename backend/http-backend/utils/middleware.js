@@ -1,11 +1,12 @@
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
+import config from '../config/index.js';
 dotenv.config();
 
 export const  middleware = (req, res, next) => {
     try {
         const token = req.headers.authorization;
-        let verification = jwt.verify(token, process.env.JWT_SECRET);
+        let verification = jwt.verify(token, config.JWT_SECRET);
         
         if(verification) {
             req.id = verification.id;   
