@@ -181,13 +181,11 @@ const Friends = () => {
 
   if (openChat) {
     return (
-      <div
-        className="fixed inset-0 bg-black/50 backdrop-blur-sm flex p-14 z-50"
-        onClick={() => {
-          setChatInterface(false);
-        }}
-      >
-        <ChatPage conversationId={conversationId} />
+      <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex p-14 z-50">
+        <ChatPage 
+          conversationId={conversationId} 
+          onClose={() => setChatInterface(false)} 
+        />
       </div>
     );
   }
