@@ -2,10 +2,12 @@ import prisma from "../index.js"
 
 
 export const getMessage = async( conversationId ) => {
-
     return prisma.message.findMany({
         where : {
             conversationId,
+        },
+        orderBy: {
+            createdAt: 'asc'
         },
         include : {
         seenBy : true

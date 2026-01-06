@@ -3,68 +3,83 @@ import axios from "axios";
 import ChatWindow from "./ChatWindow";
 import { toast } from "react-toastify";
 
-export default function ChatPage({ conversationId }) {
+export default function ChatPage({ conversationId, onClose }) {
   const [messages, setMessages] = useState([]);
   const [conId, setconId] = useState(conversationId);
   const [friedlist, setFriendlist] = useState([]);
-  const [msgLoading , setLoading] = useState(false);
+  const [msgLoading, setMsgLoading] = useState(false);
+  const [memberLoading, setMemberLoading] = useState(false);
   const token = localStorage.getItem("token");
   const user = JSON.parse(localStorage.getItem("user"));
-  // Use a ref to keep track of the socket so we don't lose connection on re-renders
   const ws = useRef(null);
 
-  const fetchMessage = async (id) => {
-    try {
-      setconId(id);
-      const seen = await axios.patch(
-        `${import.meta.env.VITE_API_URL}/chat/${conId}/seen`,
-        {},
-        { headers: { authorization: token } }
-      );
-    } catch (error) {
-      toast.success("Something went wrong");
-    }
-  };
-
+  // Fetch friend list once on mount
   useEffect(() => {
     if (!token) return;
-
-    // 1. Fetch old messages from DB
-    const fetchHistory = async () => {
+    const fetchFriends = async () => {
+      setMemberLoading(true);
       try {
         const friends = await axios.get(
           `${import.meta.env.VITE_API_URL}/friend`,
           { headers: { authorization: token } }
         );
         setFriendlist(friends.data.friend);
+      } catch (error) {
+        toast.error("Failed to load friends");
+      } finally {
+        setMemberLoading(false);
+      }
+    };
+    fetchFriends();
+  }, [token]);
+
+  const fetchMessage = async (id) => {
+    if (id === conId) return;
+    try {
+      setMessages([]); // Clear previous messages immediately to avoid "bleeding"
+      setconId(id);
+      await axios.patch(
+        `${import.meta.env.VITE_API_URL}/chat/${id}/seen`,
+        {},
+        { headers: { authorization: token } }
+      );
+    } catch (error) {
+      console.error("Error marking seen:", error);
+    }
+  };
+
+  useEffect(() => {
+    if (!token || !conId) return;
+
+    const fetchHistory = async () => {
+      setMsgLoading(true);
+      try {
         const res = await axios.get(
           `${import.meta.env.VITE_API_URL}/chat/${conId}`,
           { headers: { authorization: token } }
         );
         setMessages(res.data.message || []);
-        setLoading(false);
-
       } catch (error) {
-        toast.success("Fetch error:");
+        toast.error("Failed to load chat history");
+      } finally {
+        setMsgLoading(false);
       }
     };
 
     fetchHistory();
 
-    // 2. Connect to WebSocket
     const socket = new WebSocket(
       `${import.meta.env.VITE_API_URL}?token=${token}&conversationId=${conId}`
     );
 
     socket.onopen = () => {
-      console.log(" Connected to WebSocket");
+      console.log("Connected to WebSocket");
     };
 
     socket.onmessage = (event) => {
       const data = JSON.parse(event.data);
-
       if (data.type === "newMessage") {
-        setMessages((prev) => [...prev, data.message]); // FIX
+        setMessages((prev) => [...prev, data.message]);
       } else {
         setMessages((prev) => [...prev, data]);
       }
@@ -79,7 +94,6 @@ export default function ChatPage({ conversationId }) {
 
   const sendMessage = (content) => {
     if (ws.current && ws.current.readyState === WebSocket.OPEN) {
-      // 1. Send to Server
       ws.current.send(
         JSON.stringify({
           conversationId: conId,
@@ -88,11 +102,9 @@ export default function ChatPage({ conversationId }) {
         })
       );
 
-      // 2. OPTIMISTIC UPDATE (Fixes "Not appearing until refresh")
-      // We manually add the message to our list immediately so the sender sees it.
       const tempMsg = {
-        id: Date.now(), // Temporary ID
-        senderId: user.id, // CRITICAL: Ensure this matches the logged-in user ID
+        id: Date.now(),
+        senderId: user.id,
         content: content,
         createdAt: new Date().toISOString(),
         seenBy: [],
@@ -100,7 +112,7 @@ export default function ChatPage({ conversationId }) {
 
       setMessages((prev) => [...prev, tempMsg]);
     } else {
-      alert("Connection lost. Try refreshing.");
+      toast.error("Connection lost. Try refreshing.");
     }
   };
 
@@ -110,7 +122,9 @@ export default function ChatPage({ conversationId }) {
       sendMessage={sendMessage}
       friedlist={friedlist}
       getMeassage={fetchMessage}
-    
+      msgLoading={msgLoading}
+      memberLoading={memberLoading}
+      onClose={onClose}
     />
   );
 }
