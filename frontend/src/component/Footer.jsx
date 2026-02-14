@@ -63,15 +63,15 @@ const Footer = () => {
             <div className="space-y-4 text-sm">
               <p className="flex items-start gap-3">
                 <MapPin className="w-5 h-5 text-stone-500 shrink-0 mt-0.5" />
-                <span>A108 Adam Street<br />New York, NY 535022</span>
+                <span>Walvis Bay, Waterfront<br />Namibia</span>
               </p>
               <p className="flex items-center gap-3">
                 <Phone className="w-5 h-5 text-stone-500 shrink-0" />
-                <span>+1 5589 55488 55</span>
+                <span>+264 81 266 4189</span>
               </p>
               <p className="flex items-center gap-3">
                 <Mail className="w-5 h-5 text-stone-500 shrink-0" />
-                <span>info@example.com</span>
+                <span>info@walvisbay-eco-tourism.com</span>
               </p>
             </div>
           </div>
@@ -93,9 +93,9 @@ const Footer = () => {
 
           {/* Our Services */}
           <div>
-            <h3 className="text-lg font-bold text-white mb-6">Our Services</h3>
+            <h3 className="text-lg font-bold text-white mb-6">Our Tours</h3>
             <ul className="space-y-3">
-              {["Web Design", "Web Development", "Product Management", "Marketing", "Graphic Design"].map((service) => (
+              {["Marine Tours", "Cape Cross", "Pelican Point", "Sandwich Harbour tour", "Township Tours"].map((service) => (
                 <li key={service}>
                    <a href="#" className="inline-flex items-center hover:text-white transition-all group">
                     <span className="w-1.5 h-1.5 rounded-full bg-stone-700 group-hover:bg-white mr-3 transition-colors"></span>
@@ -139,12 +139,12 @@ const Footer = () => {
           <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-sm">
             <div className="text-center md:text-left">
               <p>
-                © Copyright <span className="font-bold text-white">Tour.</span> All Rights Reserved
+                © Copyright <span className="font-bold text-white">Walvis Bay Tours - 2026 -</span> All Rights Reserved
               </p>
             </div>
             <div className="text-center md:text-right">
               <p>
-                Designed by <a href="#" className="text-white hover:underline decoration-stone-500 underline-offset-4 transition-all">BootstrapMade</a>
+                Designed by <a href="#" className="text-white hover:underline decoration-stone-500 underline-offset-4 transition-all">VTA Namibia</a>
               </p>
             </div>
           </div>

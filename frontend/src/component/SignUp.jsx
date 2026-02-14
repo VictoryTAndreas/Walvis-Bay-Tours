@@ -104,7 +104,7 @@ const SignUp = () => {
       };
 
       const response = await axios.post(
-        `${import.meta.env.VITE_API_URL}/user/signup`,
+        `${import.meta.env.VITE_API_BASE_URL}/user/signup`,
         payload,
         { timeout: 15000 }
       );

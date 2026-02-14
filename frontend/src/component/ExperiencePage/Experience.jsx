@@ -8,6 +8,9 @@ import {
   ArrowRight,
   ChevronDown
 } from "lucide-react";
+import cruise from "../../assets/cruise.jpeg";
+import wich from "../../assets/wich.jpeg";
+import kaya from "../../assets/kaya.avif";
 
 export default function Experience() {
   const navigate = useNavigate();
@@ -15,145 +18,50 @@ export default function Experience() {
 
   const experiences = [
     {
-      id: 1,
-      slug: "serene-beach-paradise-in-maldives",
-      title: "Serene Beach Paradise in Maldives",
-      description: "Escape to crystal-clear turquoise waters and pristine white sand beaches. Experience luxury overwater villas, world-class snorkeling, and unforgettable sunsets. This tropical paradise offers the perfect blend of relaxation and adventure with vibrant coral reefs and exotic marine life.",
-      location: "Maldives",
-      duration: "7 Days / 6 Nights",
-      groupSize: "2-8 People",
-      rating: 4.9,
-      reviews: 342,
-      price: "$2,499",
-      imageGradient: "from-cyan-400 via-blue-500 to-blue-600",
-      highlights: ["Overwater Bungalow", "Scuba Diving", "Spa Treatment", "Island Hopping"]
-    },
+  id: 1,
+  slug: "walvis-bay-boat-cruise-adventure",
+  title: "Walvis Bay Boat Cruise Experience",
+  description: "Embark on a spectacular 3-hour marine adventure in Walvis Bay Lagoon. Cruise alongside playful dolphins, encounter friendly Cape fur seals, and watch pelicans up close. Indulge in fresh oysters and champagne while enjoying breathtaking views of the bay and surrounding dunes. This unforgettable journey offers the perfect introduction to Namibia's rich marine life.",
+  location: "Walvis Bay, Namibia",
+  duration: "3 Hours",
+  groupSize: "2-12 People",
+  rating: 4.9,
+  reviews: 187,
+  image: cruise,
+  price: "N$1,400",
+  imageGradient: cruise,
+  highlights: ["Dolphin Watching", "Fresh Oysters & Champagne", "Pelican Encounters", "Seal Colony Visit", "Marine Wildlife", "Scenic Bay Views"]
+},
+   {
+  id: 2,
+  slug: "sandwich-harbour-4x4-desert-adventure",
+  title: "Sandwich Harbour 4X4 Desert Adventure",
+  description: "Experience the thrill of dune driving on an exhilarating half-day 4x4 tour to Sandwich Harbour. Navigate through towering sand dunes that meet the Atlantic Ocean, witness incredible desert-adapted wildlife, and enjoy a scenic picnic in the dunes. Our experienced guides ensure a safe and unforgettable journey through one of Namibia's most spectacular coastal landscapes, with comfortable 7-seater vehicles never packed to full capacity for your comfort.",
+  location: "Walvis Bay, Namibia",
+  duration: "Half Day",
+  groupSize: "4-7 People",
+  rating: 4.8,
+  reviews: 203,
+  image: wich,
+  price: "N$2,800",
+  imageGradient: "from-amber-400 via-orange-500 to-stone-700",
+  highlights: ["Dune Driving Experience", "Sandwich Harbour Lagoon", "Picnic in the Dunes", "Desert Wildlife", "Shipwreck Views", "Flamingo Sightings"]
+},
     {
-      id: 2,
-      slug: "himalayan-mountain-trekking-adventure",
-      title: "Himalayan Mountain Trekking Adventure",
-      description: "Challenge yourself with an exhilarating trek through the majestic Himalayas. Witness breathtaking mountain vistas, ancient monasteries, and authentic Sherpa culture. This adventure combines physical challenge with spiritual discovery in one of the world's most stunning landscapes.",
-      location: "Nepal, Everest Region",
-      duration: "12 Days / 11 Nights",
-      groupSize: "6-12 People",
-      rating: 4.8,
-      reviews: 289,
-      price: "$1,899",
-      imageGradient: "from-slate-400 via-slate-600 to-slate-800",
-      highlights: ["Base Camp Trek", "Sherpa Villages", "Mountain Views", "Cultural Tours"]
-    },
-    {
-      id: 3,
-      slug: "african-safari-wildlife-expedition",
-      title: "African Safari Wildlife Expedition",
-      description: "Embark on an unforgettable journey through the African savanna. Witness the Big Five in their natural habitat, camp under starlit skies, and experience the raw beauty of nature. Professional guides ensure close encounters with lions, elephants, and countless other species.",
-      location: "Tanzania, Serengeti",
-      duration: "10 Days / 9 Nights",
-      groupSize: "4-10 People",
-      rating: 5.0,
-      reviews: 456,
-      price: "$3,299",
-      imageGradient: "from-amber-500 via-orange-600 to-red-700",
-      highlights: ["Big Five Safari", "Luxury Camps", "Hot Air Balloon", "Maasai Culture"]
-    },
-    {
-      id: 4,
-      slug: "ancient-temples-of-southeast-asia",
-      title: "Ancient Temples of Southeast Asia",
-      description: "Discover the mystical temples of Angkor Wat and immerse yourself in Southeast Asian culture. Explore ancient ruins, vibrant markets, and lush jungles. Experience traditional cuisine, silk weaving workshops, and the warm hospitality of local communities.",
-      location: "Cambodia & Thailand",
-      duration: "9 Days / 8 Nights",
-      groupSize: "2-15 People",
-      rating: 4.7,
-      reviews: 521,
-      price: "$1,599",
-      imageGradient: "from-green-600 via-emerald-700 to-teal-800",
-      highlights: ["Angkor Wat", "Floating Markets", "Cooking Classes", "Elephant Sanctuary"]
-    },
-    {
-      id: 5,
-      slug: "northern-lights-arctic-experience",
-      title: "Northern Lights Arctic Experience",
-      description: "Chase the magical Aurora Borealis in the Arctic wilderness. Stay in glass igloos, experience husky sledding, and witness nature's most spectacular light show. This once-in-a-lifetime adventure combines stunning natural phenomena with thrilling winter activities.",
-      location: "Norway, Tromsø",
-      duration: "6 Days / 5 Nights",
-      groupSize: "2-6 People",
-      rating: 4.9,
-      reviews: 267,
-      price: "$2,799",
-      imageGradient: "from-indigo-500 via-purple-600 to-pink-700",
-      highlights: ["Aurora Viewing", "Glass Igloo", "Dog Sledding", "Snowmobiling"]
-    },
-    {
-      id: 6,
-      slug: "mediterranean-coastal-cruise",
-      title: "Mediterranean Coastal Cruise",
-      description: "Sail through the stunning Mediterranean coastline visiting historic cities and hidden coves. Enjoy gourmet dining, azure waters, and charming coastal villages. This luxury cruise offers the perfect combination of culture, relaxation, and scenic beauty.",
-      location: "Greece & Croatia",
-      duration: "8 Days / 7 Nights",
-      groupSize: "10-20 People",
-      rating: 4.8,
-      reviews: 398,
-      price: "$2,199",
-      imageGradient: "from-blue-400 via-cyan-500 to-teal-600",
-      highlights: ["Island Hopping", "Wine Tasting", "Historic Sites", "Beach Time"]
-    },
-    {
-      id: 7,
-      slug: "amazon-rainforest-expedition",
-      title: "Amazon Rainforest Expedition",
-      description: "Venture deep into the world's largest rainforest for an eco-adventure. Discover incredible biodiversity, indigenous communities, and hidden waterfalls. Stay in eco-lodges and explore pristine jungle with expert naturalist guides.",
-      location: "Brazil, Amazon Basin",
-      duration: "11 Days / 10 Nights",
-      groupSize: "4-8 People",
-      rating: 4.6,
-      reviews: 178,
-      price: "$2,399",
-      imageGradient: "from-green-500 via-lime-600 to-emerald-700",
-      highlights: ["Jungle Trekking", "Wildlife Spotting", "Canoe Trips", "Indigenous Villages"]
-    },
-    {
-      id: 8,
-      slug: "japanese-cultural-immersion",
-      title: "Japanese Cultural Immersion",
-      description: "Experience the perfect blend of ancient tradition and modern innovation. Visit historic temples, witness cherry blossoms, stay in traditional ryokans, and explore bustling Tokyo. This journey offers deep insights into Japanese culture and hospitality.",
-      location: "Japan, Tokyo to Kyoto",
-      duration: "14 Days / 13 Nights",
-      groupSize: "2-12 People",
-      rating: 5.0,
-      reviews: 612,
-      price: "$3,499",
-      imageGradient: "from-pink-400 via-rose-500 to-red-600",
-      highlights: ["Cherry Blossoms", "Tea Ceremony", "Mount Fuji", "Traditional Ryokan"]
-    },
-    {
-      id: 9,
-      slug: "desert-dunes-adventure-in-dubai",
-      title: "Desert Dunes Adventure in Dubai",
-      description: "Experience the golden sands of the Arabian desert with thrilling dune bashing, camel rides, and luxury desert camps. Combine adventure with world-class shopping and modern architecture in this unique destination.",
-      location: "UAE, Dubai",
-      duration: "5 Days / 4 Nights",
-      groupSize: "2-10 People",
-      rating: 4.7,
-      reviews: 445,
-      price: "$1,799",
-      imageGradient: "from-yellow-500 via-orange-600 to-amber-700",
-      highlights: ["Dune Bashing", "Burj Khalifa", "Desert Safari", "Luxury Shopping"]
-    },
-    {
-      id: 10,
-      slug: "patagonian-glacier-trek",
-      title: "Patagonian Glacier Trek",
-      description: "Explore the dramatic landscapes of Patagonia with towering glaciers, pristine lakes, and rugged mountains. This adventure offers world-class trekking, ice climbing, and wildlife viewing in one of Earth's last wild frontiers.",
-      location: "Argentina & Chile",
-      duration: "10 Days / 9 Nights",
-      groupSize: "6-10 People",
-      rating: 4.9,
-      reviews: 234,
-      price: "$2,899",
-      imageGradient: "from-blue-300 via-cyan-400 to-sky-500",
-      highlights: ["Glacier Hiking", "Wildlife Viewing", "Mountain Climbing", "Pristine Lakes"]
-    }
+  id: 3,
+  slug: "walvis-bay-kayaking-marine-wildlife",
+  title: "Walvis Bay Kayaking Marine Wildlife Tour",
+  description: "Paddle through the calm waters of Walvis Bay lagoon on an intimate half-day kayaking adventure. Get up close with playful Cape fur seals, watch pelicans glide overhead, and spot flamingos feeding in the shallows. Perfect for beginners and nature lovers alike, this guided tour offers a unique perspective on Namibia's rich marine ecosystem while visiting local oyster farms and enjoying the stunning coastal scenery.",
+  location: "Walvis Bay, Namibia",
+  duration: "Half Day",
+  groupSize: "2-8 People",
+  rating: 4.7,
+  reviews: 156,
+  image: kaya,
+  price: "N$1,600",
+  imageGradient: "from-teal-400 via-blue-500 to-cyan-600",
+  highlights: ["Kayak with Seals", "Pelican Sightings", "Flamingo Viewing", "Oyster Farm Visit", "Marine Wildlife", "Beginner Friendly"]
+},
   ];
 
   const visibleExperiences = experiences.slice(0, visibleCount);
@@ -199,13 +107,19 @@ export default function Experience() {
                 <div className="w-full lg:w-1/2 relative">
                   <div className="relative overflow-hidden rounded-3xl shadow-2xl group-hover:shadow-orange-500/20 transition-all duration-500">
                     {/* Gradient placeholder for image */}
-                    <div className={`h-96 bg-gradient-to-br ${experience.imageGradient} flex items-center justify-center relative`}>
-                      <div className="absolute inset-0 bg-black/20 backdrop-blur-[1px]"></div>
-                      <div className="relative z-10 text-white text-center p-8">
-                        <MapPin className="w-16 h-16 mx-auto mb-4 opacity-90" />
+                    {/* Image with gradient overlay */}
+                        <div className="relative h-96 overflow-hidden">
+                        <img 
+                        src={experience.image} 
+                        alt={experience.title}
+                        className="w-full h-full object-cover"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                        <div className="absolute bottom-0 left-0 right-0 p-8 text-white">
+                        <MapPin className="w-8 h-8 mb-2 opacity-90" />
                         <p className="text-2xl font-bold">{experience.location}</p>
-                      </div>
-                    </div>
+                        </div>
+                        </div>
                     
                     {/* Floating Rating Badge */}
                     <div className="absolute top-6 right-6 bg-white/95 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg flex items-center gap-2">

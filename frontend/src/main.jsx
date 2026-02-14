@@ -8,7 +8,7 @@ import { AuthProvider } from "./context/AuthContext.jsx";
 createRoot(document.getElementById("root")).render(
   
     <AuthProvider>
-      <BrowserRouter>
+      <BrowserRouter  basename="/Walvis-Bay-Tours">
         <App />
       </BrowserRouter>
     </AuthProvider>

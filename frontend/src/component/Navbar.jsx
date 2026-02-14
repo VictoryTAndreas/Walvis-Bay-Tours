@@ -3,6 +3,7 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 import { Plane, User, Menu, X } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
 import { useState, useEffect } from "react";
+import logo from "/src/assets/logo.png";
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -39,30 +40,35 @@ const Navbar = () => {
       px-6 py-3 text-white`}
     >
       <div className="flex items-center justify-between">
-        {/* --- LOGO --- */}
-        <Link to="/" className="flex items-center space-x-3 group select-none">
-          <div className="relative">
-            <div className="w-10 h-10 bg-gradient-to-tr from-orange-600 to-orange-400 rounded-xl flex items-center justify-center shadow-lg shadow-orange-500/20 group-hover:rotate-12 transition-transform duration-300">
-              <Plane className="h-6 w-6 text-white transform rotate-45" />
-            </div>
-          </div>
-          <div className="flex flex-col">
-            <span className="text-xl font-bold tracking-tight text-white group-hover:text-orange-400 transition-colors">
-              TravelMate
-            </span>
-            <span className="text-[10px] uppercase tracking-widest text-stone-400">
-              Explore Together
-            </span>
-          </div>
-        </Link>
+       {/* --- LOGO --- */}
+<Link to="/" className="flex items-center space-x-3 group select-none">
+  <div className="relative">
+    <div className="w-10 h-10 bg-gradient-to-tr from-orange-600 to-orange-400 rounded-xl flex items-center justify-center shadow-lg shadow-orange-500/20 group-hover:rotate-12 transition-transform duration-300 overflow-hidden">
+      {/* Replace this with your logo image */}
+      <img 
+        src={logo} // Replace with your logo path
+        alt="Walvis Bay Tours Logo"
+        className="w-full h-full object-cover"
+      />
+    </div>
+  </div>
+  <div className="flex flex-col">
+    <span className="text-xl font-bold tracking-tight text-white group-hover:text-orange-400 transition-colors">
+      Walvis Bay Tours
+    </span>
+    <span className="text-[10px] uppercase tracking-widest text-stone-400">
+      Explore | Capture | Create
+    </span>
+  </div>
+</Link>
 
         {/* --- DESKTOP NAVIGATION --- */}
         <div className="hidden md:flex items-center gap-1">
           {[
-            { to: "/experience", label: "Experience" },
-            { to: "/#", label: "Destinations" },
-            { to: "/offers", label: "Offers" },
-            { to: "/find-travel-mate", label: "Find Mate" },
+            { to: "/experience", label: "PACKAGES" },
+            { to: "/#", label: "EXPLORE" },
+            { to: "/offers", label: "PROMOTIONS" },
+            { to: "/find-travel-mate", label: "Find Travel Mate" },
           ].map(({ to, label }) => (
             <Link
               key={to}

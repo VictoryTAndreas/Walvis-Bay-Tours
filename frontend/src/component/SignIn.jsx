@@ -39,7 +39,7 @@ const SignIn = () => {
     setIsLoading(true);
     try {
       const response = await axios.post(
-        `${import.meta.env.VITE_API_URL}/user/signin`,
+        `${import.meta.env.VITE_API_BASE_URL}/user/signin`,
         formData
       );
       if (response) {

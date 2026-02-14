@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { 
   MapPin, 
@@ -13,101 +13,197 @@ import {
   ShieldCheck,
   CreditCard
 } from "lucide-react";
+import BookingForm from "../BookingForm";// Adjust the import path as needed
 
+
+import eat from "../../assets/eat.jpeg";
 // Import images from assets
-import maldivesImg from "../../assets/maldives.png";
+import car from "../../assets/car.jpeg";
 import himalayasImg from "../../assets/himalayas.png";
-import safariImg from "../../assets/safari.png";
-import tokyoImg from "../../assets/tokyo.png";
+
 
 const ExpBlog = () => {
   const { slug } = useParams();
   const navigate = useNavigate();
+  const [showBookingForm, setShowBookingForm] = useState(false);
+  const [selectedPackage, setSelectedPackage] = useState(null);
 
   // Scroll to top on mount
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+  
+const experiencesData = {
+  "walvis-bay-boat-cruise-adventure": {
+    id: 1,
+    title: "Walvis Bay Boat Cruise Experience",
+    location: "Walvis Bay, Namibia",
+    rating: 4.9,
+    reviews: 187,
+    duration: "3 Hours",
+    groupSize: "2-12 People",
+    price: "N$1,400",
+    newPrice: 1400,
+    currency: "N$",
+    image: eat,
+    description: "Embark on a spectacular 3-hour marine adventure in Walvis Bay Lagoon. Cruise alongside playful dolphins, encounter friendly Cape fur seals, and watch pelicans up close. Indulge in fresh oysters and champagne while enjoying breathtaking views of the bay and surrounding dunes. This unforgettable journey offers the perfect introduction to Namibia's rich marine life.",
+    highlights: [
+      "Dolphin & Seal Encounters", 
+      "Fresh Oyster Tasting with Champagne", 
+      "Pelican Feeding Experience", 
+      "Marine Wildlife Photography", 
+      "Expert Marine Guide Commentary",
+      "Scenic Bay & Dune Views"
+    ],
+    itinerary: [
+      { day: 1, title: "Welcome Aboard", detail: "Depart from the Walvis Bay waterfront. Safety briefing and introduction to the crew. Welcome drink served as we set sail into the lagoon." },
+      { day: 2, title: "Marine Wildlife Watching", detail: "Cruise to the seal colony at Pelican Point. Watch hundreds of Cape fur seals playing in their natural habitat. Dolphins often join the boat, swimming alongside." },
+      { day: 3, title: "Oyster & Champagne Tasting", detail: "Anchor in calm waters for the highlight of the tour - fresh Namibian oysters paired with chilled champagne while pelicans and seals approach the boat." },
+      { day: 4, title: "Return Cruise", detail: "Leisurely cruise back to the harbor, spotting flamingos in the shallows and learning about the ecology of Walvis Bay. Disembark with unforgettable memories." }
+    ],
+    includes: [
+      "3-Hour Boat Cruise", 
+      "Professional Marine Guide", 
+      "Fresh Oysters", 
+      "Champagne, Wine & Beer", 
+      "Soft Drinks & Water", 
+      "Light Lunch", 
+      "All Safety Equipment"
+    ],
+    excludes: [
+      "Hotel Transfers", 
+      "Personal Travel Insurance", 
+      "Gratuities for Crew", 
+      "Souvenir Photos"
+    ]
+  },
+  
+  "sandwich-harbour-4x4-desert-adventure": {
+    id: 2,
+    title: "Sandwich Harbour 4X4 Desert Adventure",
+    location: "Sandwich Harbour, Namibia",
+    rating: 4.8,
+    reviews: 203,
+    duration: "Half Day",
+    groupSize: "4-7 People",
+    price: "N$2,800",
+    newPrice: 2800,
+    currency: "N$",
+    image: car,
+    description: "Experience the thrill of dune driving on an exhilarating half-day 4x4 tour to Sandwich Harbour. Navigate through towering sand dunes that meet the Atlantic Ocean, witness incredible desert-adapted wildlife, and enjoy a scenic picnic in the dunes. Our experienced guides ensure a safe and unforgettable journey through one of Namibia's most spectacular coastal landscapes, with comfortable 7-seater vehicles never packed to full capacity for your comfort.",
+    highlights: [
+      "Thrilling Dune Driving Experience", 
+      "Sandwich Harbour Lagoon Views", 
+      "Scenic Picnic in the Dunes", 
+      "Desert-Adapted Wildlife Spotting", 
+      "Historic Shipwreck Photography",
+      "Flamingo & Bird Watching"
+    ],
+    itinerary: [
+      { day: 1, title: "Departure from Walvis Bay", detail: "Meet your experienced 4x4 guide and depart from Walvis Bay along the scenic coastal road. Briefing on the adventure ahead and vehicle preparation for dune driving." },
+      { day: 2, title: "Dune Driving Begins", detail: "Enter the dune belt and experience the thrill of driving on towering sand dunes. Your guide demonstrates proper 4x4 techniques while navigating the challenging terrain." },
+      { day: 3, title: "Sandwich Harbour Lagoon", detail: "Arrive at the spectacular Sandwich Harbour lagoon where the dunes meet the ocean. Time for photography and exploration of this unique ecosystem." },
+      { day: 4, title: "Picnic in the Dunes", detail: "Enjoy a delicious picnic lunch set up in a scenic dune location with panoramic views. Relax and take in the breathtaking desert landscape." },
+      { day: 5, title: "Return Journey", detail: "Explore more of the dune belt on the return journey, with stops for wildlife viewing and photography before arriving back in Walvis Bay." }
+    ],
+    includes: [
+      "Experienced 4x4 Driving Guide", 
+      "Comfortable 7-Seater Vehicle", 
+      "Picnic Lunch in the Dunes", 
+      "Refreshments & Water", 
+      "Photo Stops at Key Locations", 
+      "Sandboarding (Optional)"
+    ],
+    excludes: [
+      "Hotel Pickup/Drop-off", 
+      "Personal Travel Insurance", 
+      "Gratuities for Guide", 
+      "Alcoholic Beverages"
+    ],
+    note: "7-seater vehicles - never packed to full capacity for your comfort"
+  },
+  
+  "walvis-bay-kayaking-marine-wildlife": {
+    id: 3,
+    title: "Walvis Bay Kayaking Marine Wildlife Tour",
+    location: "Walvis Bay, Namibia",
+    rating: 4.7,
+    reviews: 156,
+    duration: "Half Day",
+    groupSize: "2-8 People",
+    price: "N$1,600",
+    newPrice: 1600,
+    currency: "N$",
+    image: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=500&h=300&fit=crop",
+    description: "Paddle through the calm waters of Walvis Bay lagoon on an intimate half-day kayaking adventure. Get up close with playful Cape fur seals, watch pelicans glide overhead, and spot flamingos feeding in the shallows. Perfect for beginners and nature lovers alike, this guided tour offers a unique perspective on Namibia's rich marine ecosystem while visiting local oyster farms and enjoying the stunning coastal scenery.",
+    highlights: [
+      "Kayak Alongside Wild Seals", 
+      "Pelican & Flamingo Encounters", 
+      "Oyster Farm Visit", 
+      "Marine Wildlife Photography", 
+      "Beginner-Friendly Instruction",
+      "Scenic Lagoon Paddling"
+    ],
+    itinerary: [
+      { day: 1, title: "Meeting & Preparation", detail: "Meet your guide at the Walvis Bay waterfront. Receive your kayaking equipment, safety briefing, and basic paddling instruction. No experience necessary!" },
+      { day: 2, title: "Launch into the Lagoon", detail: "Launch into the calm waters of the lagoon and begin paddling toward Pelican Point. The sheltered waters make for easy paddling suitable for all fitness levels." },
+      { day: 3, title: "Seal Encounter", detail: "Arrive at the seal colony area where curious juvenile seals often approach kayaks, playing in the water alongside you. An unforgettable wildlife experience!" },
+      { day: 4, title: "Oyster Farm Visit", detail: "Paddle past local oyster farms and learn about Namibia's thriving oyster industry. Your guide explains the farming process and ecology of the lagoon." },
+      { day: 5, title: "Return Paddle", detail: "Enjoy a leisurely paddle back to the launch point, spotting flamingos, pelicans, and other birdlife along the way. Disembark with incredible memories." }
+    ],
+    includes: [
+      "Professional Kayaking Guide", 
+      "All Kayaking Equipment", 
+      "Safety Briefing & Instruction", 
+      "Life Jackets", 
+      "Dry Bags for Personal Items", 
+      "Wetsuits (if needed)"
+    ],
+    excludes: [
+      "Hotel Transfers", 
+      "Personal Travel Insurance", 
+      "Underwater Camera Rental", 
+      "Gratuities for Guide", 
+      "Meals & Drinks"
+    ],
+    note: "No experience needed - suitable for beginners"
+  }
+};
 
-  const experiencesData = {
-    "serene-beach-paradise-in-maldives": {
-      title: "Serene Beach Paradise in Maldives",
-      location: "Maldives, Indian Ocean",
-      rating: 4.9,
-      reviews: 342,
-      duration: "7 Days / 6 Nights",
-      groupSize: "2-8 People",
-      price: "$2,499",
-      image: maldivesImg,
-      description: "Escape to crystal-clear turquoise waters and pristine white sand beaches. Experience luxury overwater villas, world-class snorkeling, and unforgettable sunsets. This tropical paradise offers the perfect blend of relaxation and adventure with vibrant coral reefs and exotic marine life.",
-      highlights: ["Luxury Overwater Villa Stay", "Guided Snorkeling Expedition", "Private Sunset Dinner Cruise", "Traditional Maldivian Spa Treatment"],
-      itinerary: [
-        { day: 1, title: "Arrival & Tropical Welcome", detail: "Arrive at Malé International Airport and enjoy a scenic speedboat or seaplane transfer to your resort. Check into your overwater villa and enjoy a welcome sunset cocktail." },
-        { day: 2, title: "Underwater Wonderlands", detail: "Morning guided snorkeling at the house reef. Discover vibrant coral gardens and swim alongside sea turtles and tropical fish." },
-        { day: 3, title: "Island Hopping Adventure", detail: "Visit local inhabited islands to experience Maldivian culture and enjoy a traditional beach picnic on an uninhabited sandbank." },
-        { day: 4, title: "Wellness & Relaxation", detail: "Indulge in a 90-minute signature spa treatment using locally sourced coconut oils, followed by an afternoon of leisure on your private deck." }
-      ],
-      includes: ["All meals (Breakfast, Lunch, Dinner)", "Roundtrip Seaplane Transfers", "All Snorkeling Equipment", "Welcome Gift Pack"],
-      excludes: ["International Flights", "Personal Travel Insurance", "Alcoholic Beverages beyond credit", "Optional Diving Tours"]
-    },
-    "himalayan-mountain-trekking-adventure": {
-      title: "Himalayan Mountain Trekking Adventure",
-      location: "Nepal, Everest Region",
-      rating: 4.8,
-      reviews: 289,
-      duration: "12 Days / 11 Nights",
-      groupSize: "6-12 People",
-      price: "$1,899",
-      image: himalayasImg,
-      description: "Challenge yourself with an exhilarating trek through the majestic Himalayas. Witness breathtaking mountain vistas, ancient monasteries, and authentic Sherpa culture. This adventure combines physical challenge with spiritual discovery in one of the world's most stunning landscapes.",
-      highlights: ["Everest Base Camp Perspective", "Tengboche Monastery Visit", "Namche Bazaar Exploration", "Suspension Bridge Crossing"],
-      itinerary: [
-        { day: 1, title: "Kathmandu Arrival", detail: "Briefing and final gear check in the historic capital of Nepal." },
-        { day: 2, title: "Flight to Lukla", detail: "Experience one of the most scenic flights in the world to Lukla (2,860m) and begin the trek to Phakding." },
-        { day: 3, title: "Namche Bazaar Trek", detail: "The gateway to the high Himalayas. Pass through pine forests and cross high suspension bridges." }
-      ],
-      includes: ["Professional Sherpa Guides", "All Teahouse Accommodations", "Trekking Permits", "Porters for Luggage"],
-      excludes: ["International Airfare", "Tips for Porter/Guides", "Cold Drinks and Hot Showers", "Rescue Insurance"]
-    },
-    "african-safari-wildlife-expedition": {
-      title: "African Safari Wildlife Expedition",
-      location: "Tanzania, Serengeti",
-      rating: 5.0,
-      reviews: 456,
-      duration: "10 Days / 9 Nights",
-      groupSize: "4-10 People",
-      price: "$3,299",
-      image: safariImg,
-      description: "Embark on an unforgettable journey through the African savanna. Witness the Big Five in their natural habitat, camp under starlit skies, and experience the raw beauty of nature. Professional guides ensure close encounters with lions, elephants, and countless other species.",
-      highlights: ["Big Five Game Drives", "Great Migration Viewing", "Maasai Village Visit", "Bush Breakfast under Acacia Trees"],
-      itinerary: [
-        { day: 1, title: "Arusha Arrival", detail: "Meet your guide and stay in a boutique lodge on the outskirts of Arusha." },
-        { day: 2, title: "Tarangire National Park", detail: "Explore the 'Land of Giants' famous for its massive elephant herds and baobab trees." }
-      ],
-      includes: ["4x4 Custom Safari Vehicle", "All Park Entrance Fees", "Professional Wildlife Naturalist", "Full Board Lodge Stay"],
-      excludes: ["International Flights", "Alcoholic Drinks", "Visa Fees", "Balloon Safari Upgrade"]
-    },
-    "japanese-cultural-immersion": {
-        title: "Japanese Cultural Immersion",
-        location: "Japan, Tokyo to Kyoto",
-        rating: 5.0,
-        reviews: 612,
-        duration: "14 Days / 13 Nights",
-        groupSize: "2-12 People",
-        price: "$3,499",
-        image: tokyoImg,
-        description: "Experience the perfect blend of ancient tradition and modern innovation. Visit historic temples, witness cherry blossoms, stay in traditional ryokans, and explore bustling Tokyo. This journey offers deep insights into Japanese culture and hospitality.",
-        highlights: ["Traditional Tea Ceremony", "Shinkansen Bullet Train", "Kyoto Temple Tour", "Tokyo Robot Cafe Experience"],
-        itinerary: [
-          { day: 1, title: "Tokyo Arrival", detail: "Arrival at Narita/Haneda, airport transfer and evening neon tour of Shinjuku." },
-          { day: 2, title: "Old meets New", detail: "Morning visit to Meiji Shrine followed by an afternoon in the futuristic district of Akihabara." }
-        ],
-        includes: ["All Accommodations", "JR Pass for Transport", "Professional Bilingual Guide", "Selected Meals"],
-        excludes: ["International Airfare", "Travel Insurance", "Subway Fares within Cities", "Pocket WiFi Rental"]
-      }
+  const experience = experiencesData[slug] || experiencesData["walvis-bay-boat-cruise-adventure"];
+
+  const handleBookNow = () => {
+    // Convert the experience data to the format expected by BookingForm
+    const packageData = {
+      id: experience.id,
+      title: experience.title,
+      location: experience.location,
+      price: experience.newPrice || parseInt(experience.price.replace('N$', '').replace(',', '')),
+      newPrice: experience.newPrice || parseInt(experience.price.replace('N$', '').replace(',', '')),
+      currency: "N$",
+      duration: experience.duration,
+      groupSize: experience.groupSize,
+      image: experience.image,
+      note: experience.note || null
+    };
+    
+    setSelectedPackage(packageData);
+    setShowBookingForm(true);
   };
 
-  const experience = experiencesData[slug] || experiencesData["serene-beach-paradise-in-maldives"];
+  const handleCloseBooking = () => {
+    setShowBookingForm(false);
+    setSelectedPackage(null);
+  };
+
+  const handleBookingSubmit = (formData) => {
+    console.log("Booking submitted:", {
+      package: selectedPackage,
+      ...formData
+    });
+    alert(`Thank you for booking ${selectedPackage.title}! We'll contact you shortly to confirm your reservation.`);
+    handleCloseBooking();
+  };
 
   return (
     <div className="min-h-screen bg-white text-stone-900 pb-20">
@@ -118,7 +214,7 @@ const ExpBlog = () => {
           className="flex items-center gap-2 text-stone-600 hover:text-orange-500 font-medium transition-colors"
         >
           <ArrowLeft className="w-5 h-5" />
-          Back to Experiences
+          Back to Packages
         </button>
         <div className="flex gap-4">
           <button className="p-2 hover:bg-stone-50 rounded-full transition-colors">
@@ -285,8 +381,11 @@ const ExpBlog = () => {
                 </div>
               </div>
 
-              <button className="w-full bg-orange-500 hover:bg-orange-600 text-white py-5 rounded-2xl font-bold text-xl shadow-xl hover:shadow-orange-500/25 transition-all duration-300 transform hover:-translate-y-1">
-                Book Experience Now
+              <button 
+                onClick={handleBookNow}
+                className="w-full bg-orange-500 hover:bg-orange-600 text-white py-5 rounded-2xl font-bold text-xl shadow-xl hover:shadow-orange-500/25 transition-all duration-300 transform hover:-translate-y-1"
+              >
+                Book Package Now
               </button>
               
               <p className="text-center text-stone-500 text-sm font-medium">
@@ -307,6 +406,15 @@ const ExpBlog = () => {
           </div>
         </div>
       </section>
+
+      {/* Booking Form Modal */}
+      {showBookingForm && selectedPackage && (
+        <BookingForm
+          selectedPackage={selectedPackage}
+          onClose={handleCloseBooking}
+          onSubmit={handleBookingSubmit}
+        />
+      )}
     </div>
   );
 };

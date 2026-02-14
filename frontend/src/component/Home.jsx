@@ -12,7 +12,7 @@ import {
 import useInView from "../hook/useInView";
 import "swiper/css";
 import "swiper/css/navigation";
-import img7 from "../assets/img7.jpg";
+import img7 from "../assets/img7.jpeg";
 import bgV from "../assets/bgV.mp4";
 import { Link } from "react-router-dom";
 
@@ -24,7 +24,7 @@ const Home = () => {
       Icon: Globe,
       title: "Diverse Destinations",
       description:
-        "Explore a wide range of destinations, from serene beaches to majestic mountains.",
+        "Explore a wide range of destinations, from marine cruises to tournship tours.",
     },
     {
       Icon: Award,
@@ -40,9 +40,9 @@ const Home = () => {
     },
     {
       Icon: Map,
-      title: "Global Reach",
+      title: "National Reach",
       description:
-        "Access exclusive spots and hidden gems in over 100 countries worldwide.",
+        "Access exclusive spots and hidden gems accross Namibia.",
     },
     {
       Icon: Star,
@@ -84,7 +84,7 @@ const Home = () => {
             </h1>
             <p className="text-base sm:text-lg md:text-xl mb-8 text-white/90 max-w-xl mx-auto drop-shadow-md">
               Let us help you map your perfect getaway and discover
-              unforgettable adventures across the globe!
+              unforgettable adventures across Namibia!
             </p>
             <Link
               to={"/signin"}
@@ -106,7 +106,7 @@ const Home = () => {
     `}
         >
           <h1 className="text-4xl uppercase lg:text-6xl font-extrabold tracking-tight text-stone-900 leading-[1.1]">
-            Explore the World with{" "}
+            Explore the coast with{" "}
             <span className="text-orange-500">Confidence</span>
           </h1>
 
@@ -117,7 +117,7 @@ const Home = () => {
           </p>
 
           <p className="text-2xl font-medium font-sans">
-            From hidden gems in bustling cities to silent retreats in nature, we
+            From hidden gems in the coastal to silent retreats in nature, we
             handle the details so you can handle the memories.
           </p>
 

@@ -1,77 +1,123 @@
 "use client"
 import { useState, useEffect, useRef } from "react"
 import { Star, Calendar, Users, MapPin, Heart, Plane, Mountain, Waves, TreePine, Sun, X, CheckCircle, Info, Clock, Award, Sparkles } from 'lucide-react'
+import BookingForm from "./BookingForm";
+import boatCruiseImg from "../assets/boat.jpeg";
+import sandWichImg from "../assets/sandwich.jpeg";
+import kayaking from "../assets/kayaking.jpg";
 
 const TravelPackageCards = () => {
   const [isAutoPlaying, setIsAutoPlaying] = useState(true)
   const [favorites, setFavorites] = useState(new Set())
   const [selectedPackage, setSelectedPackage] = useState(null)
+  const [showDetailsModal, setShowDetailsModal] = useState(false)
+  const [showBookingForm, setShowBookingForm] = useState(false)
   const containerRef = useRef(null)
-
+  
   const travelPackages = [
+   {
+  id: 1,
+  destination: "Walvis Bay, Namibia",
+  title: "Walvis Bay Boat Cruise",
+  price: 1400,
+  originalPrice: 0, // Change from null to 0
+  currency: "N$",
+  duration: "3 Hours",
+  groupSize: "2-12 People",
+  image: boatCruiseImg,
+  rating: 4.9,
+  reviews: 187,
+  departure: "Daily - Year Round",
+  includes: ["Light Lunch", "Fresh Oysters", "Champagne", "Wine & Beer", "Cooldrink", "Professional Guide"],
+  highlights: ["Dolphin Watching", "Pelican Encounter", "Cape Fur Seals", "Marine Life", "Scenic Bay Views", "Oyster Tasting"],
+  optionalExtras: ["Photography Package", "Sunset Cruise Add-on", "Private Charter"],
+  difficulty: "Easy",
+  category: "Marine & Luxury",
+  discount: 0,
+  featured: true,
+}
+,
     {
-      id: 1,
-      destination: "Goa, India",
-      title: "Beachside Bliss in Goa",
-      price: 15999,
-      originalPrice: 18999,
-      currency: "₹",
-      duration: "5 Days, 4 Nights",
-      groupSize: "2-10 People",
-      image: "https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=500&h=300&fit=crop",
-      rating: 4.7,
-      reviews: 220,
-      departure: "Oct 1 - Mar 31",
-      includes: ["Flight", "Hotel Stay (4-star)", "Breakfast & Dinner", "Beach Tour"],
-      highlights: ["Baga Beach", "Nightlife", "Fort Aguada", "Water Sports"],
-      optionalExtras: ["Scuba Diving", "Spa Session", "Sunset Cruise"],
-      difficulty: "Easy",
-      category: "Beach & Culture",
-      discount: 16,
-      featured: true,
-    },
-    {
-      id: 2,
-      destination: "Manali, Himachal Pradesh",
-      title: "Mountain Adventure in Manali",
-      price: 12999,
-      originalPrice: 15999,
-      currency: "₹",
-      duration: "6 Days, 5 Nights",
-      groupSize: "4-12 People",
-      image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=500&h=300&fit=crop",
-      rating: 4.5,
-      reviews: 156,
-      departure: "Apr 1 - Jun 30",
-      includes: ["Transport (Volvo)", "Hotel Stay (3-star)", "All Meals Included", "Trekking Guide"],
-      highlights: ["Rohtang Pass", "Solang Valley", "Hadimba Temple", "Paragliding"],
-      optionalExtras: ["Bonfire Night", "Ski Lessons"],
-      difficulty: "Moderate",
-      category: "Adventure & Mountains",
-      discount: 19,
-      featured: false,
-    },
-    {
-      id: 3,
-      destination: "Kerala, India",
-      title: "Backwaters & Beaches of Kerala",
-      price: 18500,
-      originalPrice: 21000,
-      currency: "₹",
-      duration: "7 Days, 6 Nights",
-      groupSize: "2-8 People",
-      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtws-DR7Yzvj_uZNEq6zYT9X1GjE3LKbGNJw&s",
-      rating: 4.8,
-      reviews: 190,
-      departure: "Nov 1 - Feb 28",
-      includes: ["Flight", "Houseboat Stay", "Ayurvedic Massage", "Local Cuisine"],
-      highlights: ["Alleppey Backwaters", "Kochi Fort", "Munnar Tea Plantations"],
-      optionalExtras: ["Kathakali Show", "Spice Plantation Tour"],
-      difficulty: "Easy",
-      category: "Nature & Culture",
-      discount: 12,
-      featured: true,
-    },
+  id: 2,
+  destination: "Sandwich Harbour, Namibia",
+  title: "Sandwich Harbour 4X4 Tour",
+  price: 2800,
+  originalPrice: 0,
+  currency: "N$",
+  duration: "Half Day",
+  groupSize: "4-7 People",
+  image: sandWichImg,
+  rating: 4.8,
+  reviews: 203,
+  departure: "Daily - Year Round",
+  includes: [
+    "Experienced 4x4 Driving Guide", 
+    "Picnic in the Dunes", 
+    "Comfortable Transport", 
+    "Photo Stops", 
+    "Refreshments"
+  ],
+  highlights: [
+    "Sandwich Harbour Lagoon", 
+    "Dune Driving Experience", 
+    "Walvis Bay Wetlands", 
+    "Desert Adaptations", 
+    "Shipwreck Views",
+    "Flamingo Sightings"
+  ],
+  optionalExtras: [
+    "Breakfast Package", 
+    "Drone Photography", 
+    "Private Tour Upgrade",
+    "Sunset Option"
+  ],
+  difficulty: "Moderate",
+  category: "Adventure & Desert",
+  discount: 0,
+  featured: true,
+  note: "7-seater vehicles - never packed to full capacity for your comfort"
+},
+  {
+  id: 3,
+  destination: "Walvis Bay, Namibia",
+  title: "Kayaking Adventure",
+  price: 1600,
+  originalPrice: 0,
+  currency: "N$",
+  duration: "Half Day",
+  groupSize: "2-8 People",
+  image: kayaking,
+  rating: 4.7,
+  reviews: 156,
+  departure: "Daily - Year Round",
+  includes: [
+    "Kayaking Equipment", 
+    "Professional Guide", 
+    "Safety Briefing", 
+    "Life Jackets", 
+    "Dry Bags",
+    "Wetsuit (if needed)"
+  ],
+  highlights: [
+    "Paddle with Cape Fur Seals", 
+    "Pelican Sightings", 
+    "Flamingo Viewing", 
+    "Oyster Farms Tour", 
+    "Marine Wildlife",
+    "Lagoon Scenery"
+  ],
+  optionalExtras: [
+    "Underwater Camera Hire", 
+    "Photography Package", 
+    "Breakfast Add-on",
+    "Private Guide"
+  ],
+  difficulty: "Easy",
+  category: "Adventure & Marine",
+  discount: 0,
+  featured: false,
+  note: "No experience needed - suitable for beginners"
+},
     
   ]
 
@@ -132,6 +178,31 @@ const TravelPackageCards = () => {
     }
   }, [])
 
+  
+  const handleViewDetails = (pkg) => {
+    setSelectedPackage(pkg)
+    setShowDetailsModal(true)
+  }
+
+  const handleBookNow = () => {
+    setShowDetailsModal(false)
+    setShowBookingForm(true)
+  }
+
+  const handleCloseBooking = () => {
+    setShowBookingForm(false)
+    setSelectedPackage(null)
+  }
+
+  const handleBookingSubmit = (formData) => {
+    console.log("Booking submitted:", {
+      package: selectedPackage,
+      ...formData
+    })
+    alert(`Thank you for booking ${selectedPackage.title}! We'll contact you shortly to confirm your reservation.`)
+    handleCloseBooking()
+  }
+  
   return (
     <div className="w-full mx-auto px-4 py-16 bg-gradient-to-b from-slate-50 to-white flex flex-col items-center">
       {/* Header Section */}
@@ -151,7 +222,7 @@ const TravelPackageCards = () => {
           </div>
         </div>
         <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-          Explore incredible Indian destinations with our curated travel packages. Discover the beauty of India with unforgettable experiences!
+          Discover a Namibian Adventure with our curated travel packages. Discover the beauty of Walvis Bay with unforgettable experiences!
         </p>
       </div>
 
@@ -262,7 +333,7 @@ const TravelPackageCards = () => {
 
               {/* Action Button */}
               <button
-                onClick={() => setSelectedPackage(pkg)}
+                onClick={() => handleViewDetails(pkg)}
                 className="w-full py-3 bg-gradient-to-r from-orange-600 to-orange-600 hover:from-orange-500 hover:to-orange-500 text-white font-semibold rounded-2xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-emerald-500/25 border border-emerald-500/20"
               >
                 View Details & Book
@@ -272,11 +343,11 @@ const TravelPackageCards = () => {
         ))}
       </div>
 
-      {/* Modal */}
-      {selectedPackage && (
+      {/* Details Modal */}
+      {showDetailsModal && selectedPackage && (
         <div
           className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 p-4"
-          onClick={() => setSelectedPackage(null)}
+          onClick={() => setShowDetailsModal(false)}
         >
           <div
             className="bg-white rounded-3xl shadow-2xl w-full max-w-2xl relative overflow-hidden max-h-[90vh] overflow-y-auto border border-gray-200"
@@ -285,7 +356,7 @@ const TravelPackageCards = () => {
             {/* Close Button */}
             <button
               className="absolute top-6 right-6 z-10 p-2 bg-white/90 backdrop-blur-sm rounded-full text-gray-600 hover:text-red-500 hover:bg-red-50 transition-all duration-300 shadow-lg border border-gray-200"
-              onClick={() => setSelectedPackage(null)}
+              onClick={() => setShowDetailsModal(false)}
             >
               <X className="w-6 h-6" />
             </button>
@@ -444,13 +515,26 @@ const TravelPackageCards = () => {
                   )}
                 </div>
                 
-                <button className="w-full py-4 bg-gradient-to-r from-orange-600 to-orange-600 hover:from-orange-500 hover:to-teal-500 text-white text-lg font-bold rounded-2xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-emerald-500/25">
+                <button
+                  onClick={handleBookNow}
+                  className="w-full py-4 bg-gradient-to-r from-orange-600 to-orange-600 hover:from-orange-500 hover:to-teal-500 text-white text-lg font-bold rounded-2xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-emerald-500/25"
+                >
                   Book This Package Now
                 </button>
               </div>
             </div>
           </div>
         </div>
+        
+      )}
+
+      {/* Booking Form Modal */}
+      {showBookingForm && selectedPackage && (
+        <BookingForm
+          selectedPackage={selectedPackage}
+          onClose={handleCloseBooking}
+          onSubmit={handleBookingSubmit}
+        />
       )}
 
         <button className=" px-10 font-medium py-6  rounded-full  bg-stone-900 text-amber-50 hover:scale-105 hover:bg-orange-600 transition duration-200">View All Tours</button>
