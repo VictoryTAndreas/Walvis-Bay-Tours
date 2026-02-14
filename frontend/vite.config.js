@@ -7,5 +7,5 @@ export default defineConfig({
   plugins: [react(),
     tailwindcss(),
   ],
-  base: 'https://github.com/VictoryTAndreas/Walvis-Bay-Tours/'
+  base: '/Walvis-Bay-Tours/'  // Just the path, not the full URL
 })
