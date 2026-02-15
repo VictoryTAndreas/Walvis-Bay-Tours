@@ -131,9 +131,9 @@ const Navbar = () => {
         <div className="flex flex-col gap-2">
           {/* Mobile Links */}
           {[
-            { to: "/experience", label: "Experience" },
-            { to: "/#", label: "Destinations" },
-            { to: "/offers", label: "Offers" },
+            { to: "/experience", label: "PACKAGES" },
+            { to: "/#", label: "EXPLORE" },
+            { to: "/offers", label: "PROMOTIONS" },
             { to: "/find-travel-mate", label: "Find Travel Mate" },
           ].map(({ to, label }) => (
             <Link
