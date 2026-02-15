@@ -5,6 +5,7 @@ import {
 } from "react-icons/fa";
 import axios from "axios";
 import toast from "react-hot-toast";
+import logo from "/src/assets/logo.png";
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -156,13 +157,18 @@ const SignUp = () => {
         <div className="p-8 sm:p-10 lg:p-12">
           {/* Title */}
           <div className="text-center mb-10">
-            <div className="inline-flex items-center justify-center p-3 bg-[#F26E21]/15 rounded-2xl mb-4 text-[#F26E21] shadow-inner">
-              <FaPlane className="text-2xl transform -rotate-45" />
+            <div className="w-10 h-10 rounded-xl flex items-center justify-center group-hover:rotate-12 transition-transform duration-300 overflow-hidden">
+                              {/* Replace this with your logo image */}
+                <img 
+                  src={logo} // Replace with your logo path
+                  alt="Walvis Bay Tours Logo"
+                  className="w-full h-full object-cover"
+                />
             </div>
 
             <h1 className="text-3xl sm:text-4xl font-extrabold text-gray-900 mb-2 tracking-tight">
               Join{" "}
-              <span className="text-[#F26E21] drop-shadow-sm">TravelMate</span>
+              <span className="text-[#F26E21] drop-shadow-sm">Walvis Bay Tours</span>
             </h1>
 
             <p className="text-gray-600 text-lg">
@@ -186,7 +192,7 @@ const SignUp = () => {
             }
             input:focus {
               background: #ffffff;
-              border-color: #F26E21;
+              border-color: #2bb1e1;
               box-shadow: 0 0 0 4px rgba(242, 110, 33, 0.25);
             }
             input::placeholder {
@@ -201,7 +207,7 @@ const SignUp = () => {
               </label>
               <input
                 name="name"
-                placeholder="John Doe"
+                placeholder="Nangula Chris"
                 value={formData.name}
                 onChange={handleOnChange}
               />
@@ -216,7 +222,7 @@ const SignUp = () => {
                 <input
                   type="email"
                   name="email"
-                  placeholder="john@example.com"
+                  placeholder="Nangula@example.com"
                   value={formData.email}
                   onChange={handleOnChange}
                 />
@@ -244,7 +250,7 @@ const SignUp = () => {
                 </label>
                 <input
                   name="city"
-                  placeholder="Mumbai"
+                  placeholder="Windhoek"
                   value={formData.city}
                   onChange={handleOnChange}
                 />
@@ -256,7 +262,7 @@ const SignUp = () => {
                 </label>
                 <input
                   name="country"
-                  placeholder="India"
+                  placeholder="Namibia"
                   value={formData.country}
                   onChange={handleOnChange}
                 />

@@ -9,6 +9,8 @@ import axios from "axios";
 import { useAuth } from "../context/AuthContext";
 import { toast } from "react-toastify";
 import ClipLoader from "react-spinners/ClipLoader";
+import logo from "/src/assets/logo.png";
+
 
 const SignIn = () => {
   const [formData, setFormData] = useState({
@@ -73,8 +75,13 @@ const SignIn = () => {
 
         <div className="p-8 sm:p-10">
           <div className="text-center mb-8">
-            <div className="inline-flex items-center justify-center p-3 bg-[#F26E21]/10 rounded-2xl mb-4 text-[#F26E21]">
-              <FaPlane className="text-3xl transform -rotate-45" />
+            <div className="w-10 h-10 rounded-xl flex items-center justify-center group-hover:rotate-12 transition-transform duration-300 overflow-hidden">
+                                          {/* Replace this with your logo image */}
+              <img 
+                  src={logo} // Replace with your logo path
+                  alt="Walvis Bay Tours Logo"
+                  className="w-full h-full object-cover"
+                />
             </div>
             <h2 className="text-5xl font-extrabold text-gray-900 tracking-tight">
               Welcome Back!
@@ -86,7 +93,7 @@ const SignIn = () => {
 
           {isLoading ? (
             <div className="flex justify-center items-center h-40">
-              <ClipLoader color="#F26E21" size={48} />
+              <ClipLoader color="#2191d1" size={48} />
             </div>
           ) : (
             <>
@@ -152,7 +159,7 @@ const SignIn = () => {
                 {/* Submit Button */}
                 <button
                   type="submit"
-                  className="w-full bg-[#F26E21] hover:bg-[#d65a13] text-white font-bold py-4 rounded-xl shadow-lg shadow-orange-500/30 transform transition-all duration-300 hover:scale-[1.01] hover:shadow-orange-500/50"
+                  className="w-full bg-[#F26E21] hover:bg-[#d65a13] text-white font-bold py-4 rounded-xl shadow-lg shadow-red-500/30 transform transition-all duration-300 hover:scale-[1.01] hover:shadow-orange-500/50"
                 >
                   Sign In
                 </button>

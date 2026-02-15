@@ -43,17 +43,17 @@ const Navbar = () => {
        {/* --- LOGO --- */}
 <Link to="/" className="flex items-center space-x-3 group select-none">
   <div className="relative">
-    <div className="w-10 h-10 bg-gradient-to-tr from-orange-600 to-orange-400 rounded-xl flex items-center justify-center shadow-lg shadow-orange-500/20 group-hover:rotate-12 transition-transform duration-300 overflow-hidden">
-      {/* Replace this with your logo image */}
-      <img 
-        src={logo} // Replace with your logo path
-        alt="Walvis Bay Tours Logo"
-        className="w-full h-full object-cover"
-      />
+    <div className="w-10 h-10 rounded-xl flex items-center justify-center group-hover:rotate-12 transition-transform duration-300 overflow-hidden">
+                                  {/* Replace this with your logo image */}
+        <img 
+          src={logo} // Replace with your logo path
+          alt="Walvis Bay Tours Logo"
+          className="w-full h-full object-cover"
+        />
     </div>
   </div>
   <div className="flex flex-col">
-    <span className="text-xl font-bold tracking-tight text-white group-hover:text-orange-400 transition-colors">
+    <span className="text-xl font-bold tracking-tight text-white group-hover:text-blue-600 transition-colors">
       Walvis Bay Tours
     </span>
     <span className="text-[10px] uppercase tracking-widest text-stone-400">
@@ -73,7 +73,7 @@ const Navbar = () => {
             <Link
               key={to}
               to={to}
-              className="relative px-4 py-2 rounded-full text-sm font-medium text-stone-300 hover:text-white transition-all duration-300 hover:bg-white/10"
+              className="relative px-4 py-2 rounded-full text-sm font-medium text-stone-300 hover:text-blue transition-all duration-300 hover:bg-white/10"
             >
               {label}
             </Link>
@@ -86,13 +86,13 @@ const Navbar = () => {
             <>
               <button
                 onClick={() => navigate("/signin")}
-                className="text-sm font-semibold text-white hover:bg-orange-500 transition-colors px-4.5 border border-amber-50 rounded-2xl py-2"
+                className="text-sm font-semibold text-white hover:bg-blue-500 transition-colors px-4.5 border border-amber-50 rounded-2xl py-2"
               >
                 Sign In
               </button>
               <button
                 onClick={() => navigate("/signup")}
-                className="bg-white text-stone-900 px-5 py-2 rounded-full text-sm font-bold hover:bg-orange-500 hover:text-white transition-all duration-300 shadow-lg shadow-white/10 hover:shadow-orange-500/20"
+                className="bg-white text-stone-900 px-5 py-2 rounded-full text-sm font-bold hover:bg-blue-600 hover:text-white transition-all duration-300 shadow-lg shadow-white/10 hover:shadow-blue-600/20"
               >
                 Sign Up
               </button>
@@ -100,7 +100,7 @@ const Navbar = () => {
           ) : (
             <button
               onClick={() => navigate("/Dashboard")}
-              className="flex items-center justify-center w-10 h-10 rounded-full border border-white/20 bg-white/5 hover:bg-orange-500 hover:border-orange-500 transition-all duration-300 group"
+              className="flex items-center justify-center w-10 h-10 rounded-full border border-white/20 bg-white/5 hover:bg-blue-600 hover:border-blue-500 transition-all duration-300 group"
             >
               <User className="h-5 w-5 text-white" />
             </button>
