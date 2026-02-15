@@ -211,7 +211,7 @@ const experiencesData = {
       <div className="fixed top-20 left-0 right-0 z-40 bg-white/80 backdrop-blur-md px-6 py-4 flex justify-between items-center border-b border-stone-100 shadow-sm">
         <button 
           onClick={() => navigate("/experience")}
-          className="flex items-center gap-2 text-stone-600 hover:text-orange-500 font-medium transition-colors"
+          className="flex items-center gap-2 text-stone-600 hover:text-blue-500 font-medium transition-colors"
         >
           <ArrowLeft className="w-5 h-5" />
           Back to Packages
@@ -236,11 +236,11 @@ const experiencesData = {
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
         <div className="absolute bottom-0 left-0 right-0 p-8 md:p-16 max-w-7xl mx-auto">
           <div className="flex items-center gap-3 mb-4">
-            <span className="bg-orange-500 text-white px-4 py-1 rounded-full text-sm font-bold uppercase tracking-wider">
+            <span className="bg-blue-500 text-white px-4 py-1 rounded-full text-sm font-bold uppercase tracking-wider">
               Bestseller
             </span>
             <div className="flex items-center gap-1 text-white">
-              <Star className="w-4 h-4 fill-orange-500 text-orange-500" />
+              <Star className="w-4 h-4 fill-blue-500 text-blue-500" />
               <span className="font-bold">{experience.rating}</span>
               <span className="opacity-70 text-sm">({experience.reviews} reviews)</span>
             </div>
@@ -250,15 +250,15 @@ const experiencesData = {
           </h1>
           <div className="flex flex-wrap gap-6 text-white/90">
             <div className="flex items-center gap-2">
-              <MapPin className="w-5 h-5 text-orange-400" />
+              <MapPin className="w-5 h-5 text-blue-400" />
               <span className="font-medium">{experience.location}</span>
             </div>
             <div className="flex items-center gap-2">
-              <Clock className="w-5 h-5 text-orange-400" />
+              <Clock className="w-5 h-5 text-blue-400" />
               <span className="font-medium">{experience.duration}</span>
             </div>
             <div className="flex items-center gap-2">
-              <Users className="w-5 h-5 text-orange-400" />
+              <Users className="w-5 h-5 text-blue-400" />
               <span className="font-medium">{experience.groupSize}</span>
             </div>
           </div>
@@ -276,7 +276,7 @@ const experiencesData = {
             <div>
               <h2 className="text-3xl font-bold mb-6 flex items-center gap-3">
                 Experience Overview
-                <div className="h-1 w-12 bg-orange-500 rounded-full"></div>
+                <div className="h-1 w-12 bg-blue-500 rounded-full"></div>
               </h2>
               <p className="text-lg text-stone-600 leading-relaxed">
                 {experience.description}
@@ -289,8 +289,8 @@ const experiencesData = {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {experience.highlights.map((highlight, idx) => (
                   <div key={idx} className="flex items-start gap-4">
-                    <div className="bg-orange-100 p-2 rounded-lg shrink-0">
-                      <CheckCircle2 className="w-6 h-6 text-orange-600" />
+                    <div className="bg-blue-100 p-2 rounded-lg shrink-0">
+                      <CheckCircle2 className="w-6 h-6 text-blue-600" />
                     </div>
                     <span className="text-lg font-medium text-stone-800">{highlight}</span>
                   </div>
@@ -305,7 +305,7 @@ const experiencesData = {
                 <div className="absolute left-6 top-4 bottom-4 w-0.5 bg-stone-100"></div>
                 {experience.itinerary.map((item, idx) => (
                   <div key={idx} className="relative pl-16">
-                    <div className="absolute left-0 top-1 w-12 h-12 bg-white border-4 border-orange-500 rounded-full flex items-center justify-center font-bold text-lg z-10 shadow-lg">
+                    <div className="absolute left-0 top-1 w-12 h-12 bg-white border-4 border-blue-500 rounded-full flex items-center justify-center font-bold text-lg z-10 shadow-lg">
                       {item.day}
                     </div>
                     <h4 className="text-2xl font-bold mb-2 text-stone-900">{item.title}</h4>
@@ -354,7 +354,7 @@ const experiencesData = {
           <div className="lg:col-span-1">
             <div className="sticky top-40 bg-white border border-stone-100 shadow-2xl rounded-[2.5rem] p-8 space-y-8 overflow-hidden">
               {/* Highlight background */}
-              <div className="absolute -top-12 -right-12 w-40 h-40 bg-orange-100 rounded-full opacity-30 blur-3xl"></div>
+              <div className="absolute -top-12 -right-12 w-40 h-40 bg-blue-100 rounded-full opacity-30 blur-3xl"></div>
               
               <div className="relative">
                 <p className="text-stone-500 font-medium mb-1">Total price for experience</p>
@@ -367,14 +367,14 @@ const experiencesData = {
               <div className="space-y-4 border-t border-stone-50 pt-8">
                 <div className="flex items-center justify-between p-4 bg-stone-50 rounded-2xl border border-stone-100">
                   <div className="flex items-center gap-3">
-                    <Calendar className="w-5 h-5 text-orange-500" />
+                    <Calendar className="w-5 h-5 text-blue-500" />
                     <span className="font-bold text-stone-700">Select Date</span>
                   </div>
                   <CheckCircle2 className="w-5 h-5 text-stone-300" />
                 </div>
                 <div className="flex items-center justify-between p-4 bg-stone-50 rounded-2xl border border-stone-100">
                   <div className="flex items-center gap-3">
-                    <Users className="w-5 h-5 text-orange-500" />
+                    <Users className="w-5 h-5 text-blue-500" />
                     <span className="font-bold text-stone-700">Guests</span>
                   </div>
                   <span className="bg-white px-3 py-1 rounded-lg border border-stone-200 font-bold">2</span>
@@ -383,7 +383,7 @@ const experiencesData = {
 
               <button 
                 onClick={handleBookNow}
-                className="w-full bg-orange-500 hover:bg-orange-600 text-white py-5 rounded-2xl font-bold text-xl shadow-xl hover:shadow-orange-500/25 transition-all duration-300 transform hover:-translate-y-1"
+                className="w-full bg-blue-500 hover:bg-blue-600 text-white py-5 rounded-2xl font-bold text-xl shadow-xl hover:shadow-blue-500/25 transition-all duration-300 transform hover:-translate-y-1"
               >
                 Book Package Now
               </button>
@@ -394,7 +394,7 @@ const experiencesData = {
 
               <div className="space-y-4 pt-4 border-t border-stone-50">
                 <div className="flex items-center gap-3 text-stone-600">
-                  <ShieldCheck className="w-5 h-5 text-green-600" />
+                  <ShieldCheck className="w-5 h-5 text-blue-600" />
                   <span className="font-medium">Secure Payments Verified</span>
                 </div>
                 <div className="flex items-center gap-3 text-stone-600">

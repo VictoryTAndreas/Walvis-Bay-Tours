@@ -74,18 +74,18 @@ export default function Experience() {
   return (
     <div className="min-h-screen bg-white text-stone-900">
       {/* Hero Section */}
-      <section className="relative pt-32 pb-20 px-6 bg-gradient-to-br from-orange-50 via-white to-stone-50">
+      <section className="relative pt-32 pb-20 px-6 bg-gradient-to-br from-blue-50 via-white to-stone-50">
         <div className="max-w-7xl mx-auto text-center">
           <h1 className="text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight mb-6">
             Discover Your Next
-            <span className="block text-orange-500 mt-2">Adventure</span>
+            <span className="block text-blue-500 mt-2">Adventure</span>
           </h1>
           <p className="text-xl md:text-2xl text-stone-600 max-w-3xl mx-auto leading-relaxed">
             Curated travel experiences that transform ordinary trips into extraordinary memories. 
             From serene beaches to mountain peaks, we bring the world closer to you.
           </p>
           <div className="mt-8 flex justify-center">
-            <div className="w-24 h-1.5 bg-gradient-to-r from-orange-300 via-orange-500 to-orange-600 rounded-full"></div>
+            <div className="w-24 h-1.5 bg-gradient-to-r from-blue-300 via-blue-500 to-blue-600 rounded-full"></div>
           </div>
         </div>
       </section>
@@ -105,7 +105,7 @@ export default function Experience() {
               >
                 {/* Image Section */}
                 <div className="w-full lg:w-1/2 relative">
-                  <div className="relative overflow-hidden rounded-3xl shadow-2xl group-hover:shadow-orange-500/20 transition-all duration-500">
+                  <div className="relative overflow-hidden rounded-3xl shadow-2xl group-hover:shadow-blue-500/20 transition-all duration-500">
                     {/* Gradient placeholder for image */}
                     {/* Image with gradient overlay */}
                         <div className="relative h-96 overflow-hidden">
@@ -123,20 +123,20 @@ export default function Experience() {
                     
                     {/* Floating Rating Badge */}
                     <div className="absolute top-6 right-6 bg-white/95 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg flex items-center gap-2">
-                      <Star className="w-5 h-5 fill-orange-500 text-orange-500" />
+                      <Star className="w-5 h-5 fill-blue-500 text-blue-500" />
                       <span className="font-bold text-stone-900">{experience.rating}</span>
                       <span className="text-stone-500 text-sm">({experience.reviews})</span>
                     </div>
 
                     {/* Price Badge */}
-                    <div className="absolute bottom-6 left-6 bg-orange-500 text-white px-6 py-3 rounded-full shadow-xl">
+                    <div className="absolute bottom-6 left-6 bg-blue-600 text-white px-6 py-3 rounded-full shadow-xl">
                       <p className="text-sm font-medium">Starting from</p>
                       <p className="text-2xl font-bold">{experience.price}</p>
                     </div>
                   </div>
 
                   {/* Decorative Element */}
-                  <div className={`absolute -z-10 ${isEven ? '-right-8' : '-left-8'} top-8 w-72 h-72 bg-orange-200/30 rounded-full blur-3xl`}></div>
+                  <div className={`absolute -z-10 ${isEven ? '-right-8' : '-left-8'} top-8 w-72 h-72 bg-blue-200/30 rounded-full blur-3xl`}></div>
                 </div>
 
                 {/* Content Section */}
@@ -153,8 +153,8 @@ export default function Experience() {
                   {/* Meta Information */}
                   <div className="flex flex-wrap gap-6">
                     <div className="flex items-center gap-3">
-                      <div className="w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center">
-                        <Calendar className="w-6 h-6 text-orange-600" />
+                      <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
+                        <Calendar className="w-6 h-6 text-blue-600" />
                       </div>
                       <div>
                         <p className="text-sm text-stone-500 font-medium">Duration</p>
@@ -163,8 +163,8 @@ export default function Experience() {
                     </div>
 
                     <div className="flex items-center gap-3">
-                      <div className="w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center">
-                        <Users className="w-6 h-6 text-orange-600" />
+                      <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
+                        <Users className="w-6 h-6 text-blue-600" />
                       </div>
                       <div>
                         <p className="text-sm text-stone-500 font-medium">Group Size</p>
@@ -180,7 +180,7 @@ export default function Experience() {
                       {experience.highlights.map((highlight, idx) => (
                         <span
                           key={idx}
-                          className="px-4 py-2 bg-stone-100 text-stone-700 rounded-full text-sm font-medium hover:bg-orange-100 hover:text-orange-700 transition-colors"
+                          className="px-4 py-2 bg-stone-100 text-stone-700 rounded-full text-sm font-medium hover:bg-blue-100 hover:text-blue-700 transition-colors"
                         >
                           {highlight}
                         </span>
@@ -191,7 +191,7 @@ export default function Experience() {
                   {/* CTA Button */}
                   <button 
                     onClick={() => navigate(`/experience/${experience.slug}`)}
-                    className="group/btn bg-stone-900 hover:bg-orange-600 text-white px-8 py-4 rounded-full font-semibold text-lg flex items-center gap-3 shadow-xl hover:shadow-orange-500/25 transition-all duration-300 hover:-translate-y-1"
+                    className="group/btn bg-stone-900 hover:bg-blue-600 text-white px-8 py-4 rounded-full font-semibold text-lg flex items-center gap-3 shadow-xl hover:shadow-blue-500/25 transition-all duration-300 hover:-translate-y-1"
                   >
                     Explore This Experience
                     <ArrowRight className="w-5 h-5 group-hover/btn:translate-x-2 transition-transform" />
@@ -207,7 +207,7 @@ export default function Experience() {
           <div className="flex justify-center mt-16">
             <button
               onClick={handleViewMore}
-              className="group bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white px-12 py-5 rounded-full font-bold text-lg shadow-2xl hover:shadow-orange-500/50 transition-all duration-300 hover:scale-105 flex items-center gap-3"
+              className="group bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white px-12 py-5 rounded-full font-bold text-lg shadow-2xl hover:shadow-blue-500/50 transition-all duration-300 hover:scale-105 flex items-center gap-3"
             >
               View More Experiences
               <ChevronDown className="w-6 h-6 group-hover:translate-y-1 transition-transform" />
@@ -240,7 +240,7 @@ export default function Experience() {
             Let's create unforgettable memories together.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="bg-orange-500 hover:bg-orange-600 text-white px-10 py-4 rounded-full font-bold text-lg shadow-2xl hover:shadow-orange-500/50 transition-all duration-300 hover:scale-105">
+            <button className="bg-blue-500 hover:bg-blue-600 text-white px-10 py-4 rounded-full font-bold text-lg shadow-2xl hover:shadow-blue-500/50 transition-all duration-300 hover:scale-105">
               Plan My Trip
             </button>
             <button className="bg-white/10 backdrop-blur-md hover:bg-white/20 text-white border-2 border-white/30 px-10 py-4 rounded-full font-bold text-lg transition-all duration-300 hover:scale-105">

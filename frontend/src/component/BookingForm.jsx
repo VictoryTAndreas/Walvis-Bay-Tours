@@ -6,7 +6,7 @@ import logo from "/src/assets/logo.png";
 const EMAILJS_SERVICE_ID = 'service_o3ejxng'; // Replace with your Service ID
 const EMAILJS_TEMPLATE_ID = 'template_uakit0e'; // Replace with your Template ID
 const EMAILJS_PUBLIC_KEY = 'pWuBuEqzbPQ8JJFQq'; // Replace with your Public Key
-
+const EMAILJS_CUSTOMER_TEMPLATE_ID = 'template_3z0fsfs';
 const BookingForm = ({ selectedPackage, onClose, onSubmit }) => {
   const [formData, setFormData] = useState({
     fullName: "",
@@ -96,6 +96,12 @@ const BookingForm = ({ selectedPackage, onClose, onSubmit }) => {
         EMAILJS_PUBLIC_KEY
       );
 
+      await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_CUSTOMER_TEMPLATE_ID,
+        templateParams,
+        EMAILJS_PUBLIC_KEY
+      );
       // Show success message
       alert(`Booking confirmed! Your reference number is ${bookingReference}. We will contact you soon.`);
       
