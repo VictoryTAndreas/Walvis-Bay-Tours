@@ -208,16 +208,16 @@ const TravelPackageCards = () => {
       {/* Header Section */}
       <div className="text-center mb-16">
         <div className="flex items-center justify-center mb-6">
-          <div className="p-3 bg-gradient-to-r from-orange-500 to-orange-500 rounded-2xl shadow-lg mr-4">
+          <div className="p-3 bg-gradient-to-r from-blue-500 to-blue-500 rounded-2xl shadow-lg mr-4">
             <Plane className="w-8 h-8 text-white" />
           </div>
           <div className="text-left">
-            <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-orange-900 to-gray-700 bg-clip-text text-transparent">
+            <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-900 to-gray-700 bg-clip-text text-transparent">
               Featured Travel Packages
             </h2>
             <div className="flex items-center gap-2 mt-2">
               <Sparkles className="w-4 h-4 text-emerald-500" />
-              <span className="text-orange-600 font-medium">Handpicked by Experts</span>
+              <span className="text-blue-600 font-medium">Handpicked by Experts</span>
             </div>
           </div>
         </div>
@@ -334,7 +334,7 @@ const TravelPackageCards = () => {
               {/* Action Button */}
               <button
                 onClick={() => handleViewDetails(pkg)}
-                className="w-full py-3 bg-gradient-to-r from-orange-600 to-orange-600 hover:from-orange-500 hover:to-orange-500 text-white font-semibold rounded-2xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-emerald-500/25 border border-emerald-500/20"
+                className="w-full py-3 bg-gradient-to-r from-blue-600 to-blue-600 hover:from-blue-400 hover:to-blue-400 text-white font-semibold rounded-2xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-emerald-500/25 border border-emerald-500/20"
               >
                 View Details & Book
               </button>
@@ -517,7 +517,7 @@ const TravelPackageCards = () => {
                 
                 <button
                   onClick={handleBookNow}
-                  className="w-full py-4 bg-gradient-to-r from-orange-600 to-orange-600 hover:from-orange-500 hover:to-teal-500 text-white text-lg font-bold rounded-2xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-emerald-500/25"
+                  className="w-full py-4 bg-gradient-to-r from-blue-600 to-blue-600 hover:from-blue-400 hover:to-teal-500 text-white text-lg font-bold rounded-2xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-emerald-500/25"
                 >
                   Book This Package Now
                 </button>
@@ -537,7 +537,7 @@ const TravelPackageCards = () => {
         />
       )}
 
-        <button className=" px-10 font-medium py-6  rounded-full  bg-stone-900 text-amber-50 hover:scale-105 hover:bg-orange-600 transition duration-200">View All Tours</button>
+        <button className=" px-10 font-medium py-6  rounded-full  bg-stone-900 text-amber-50 hover:scale-105 hover:bg-red-600 transition duration-200">View All Tours</button>
       <style jsx>{`
         .no-scrollbar::-webkit-scrollbar {
           display: none;
