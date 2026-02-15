@@ -107,7 +107,7 @@ const Home = () => {
         >
           <h1 className="text-4xl uppercase lg:text-6xl font-extrabold tracking-tight text-stone-900 leading-[1.1]">
             Explore the coast with{" "}
-            <span className="text-orange-500">Confidence</span>
+            <span className="text-blue-600">Confidence</span>
           </h1>
 
           <p className="text-2xl font-medium font-sans">
@@ -122,7 +122,7 @@ const Home = () => {
           </p>
 
           <div className="pt-4">
-            <button className="group mb-10 bg-stone-900 hover:bg-orange-600 text-white px-8 py-4 rounded-full text-lg font-medium transition-all duration-300 flex items-center gap-2 shadow-xl hover:shadow-orange-500/25 hover:-translate-y-1">
+            <button className="group mb-10 bg-stone-900 hover:bg-blue-600 text-white px-8 py-4 rounded-full text-lg font-medium transition-all duration-300 flex items-center gap-2 shadow-xl hover:shadow-blue-500/25 hover:-translate-y-1">
               Start Your Journey
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </button>
@@ -132,7 +132,7 @@ const Home = () => {
         <div className="flex-1 relative w-full  lg:max-w-none px-4 sm:px-0 ">
           <div className="relative group flex justify-center">
             {/* Image border decoration */}
-            <div className="absolute -inset-0.5 sm:-inset-1 bg-gradient-to-r from-orange-400 to-stone-300 rounded-2xl sm:rounded-[2rem] blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
+            <div className="absolute -inset-0.5 sm:-inset-1 bg-gradient-to-r from-blue-400 to-stone-300 rounded-2xl sm:rounded-[2rem] blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
 
             <img
               src={img7}
@@ -142,7 +142,7 @@ const Home = () => {
 
             {/* Floating Card Overlay */}
             <div className="absolute bottom-3 left-3 right-3 sm:bottom-6 sm:left-6 sm:right-auto bg-white/95 backdrop-blur-sm p-3 sm:p-4 rounded-xl sm:rounded-2xl shadow-lg flex items-center gap-3 sm:gap-4 animate-fade-in-up sm:max-w-xs">
-              <div className="bg-green-100 p-2 sm:p-3 rounded-full text-green-600 shrink-0">
+              <div className="bg-green-100 p-2 sm:p-3 rounded-full text-blue-900 shrink-0">
                 <Globe className="w-5 h-5 sm:w-6 sm:h-6" />
               </div>
               <div className="min-w-0">
@@ -179,14 +179,14 @@ const Home = () => {
                 className="group bg-white rounded-[2rem] p-8 border border-stone-100 shadow-sm hover:shadow-xl transition-all duration-300 ease-out hover:-translate-y-2 relative overflow-hidden"
               >
                 {/* Hover Gradient Background */}
-                <div className="absolute inset-0 bg-gradient-to-br from-orange-50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 
                 <div className="relative z-10 flex flex-col items-center text-center h-full">
-                  <div className="w-16 h-16 bg-stone-100 group-hover:bg-orange-500 rounded-2xl flex items-center justify-center mb-6 text-stone-900 group-hover:text-white transition-colors duration-300 shadow-inner group-hover:shadow-orange-500/40">
+                  <div className="w-16 h-16 bg-stone-100 group-hover:bg-blue-500 rounded-2xl flex items-center justify-center mb-6 text-stone-900 group-hover:text-white transition-colors duration-300 shadow-inner group-hover:shadow-blue-300/40">
                     <Icon className="w-8 h-8" />
                   </div>
 
-                  <h3 className="text-xl font-bold text-stone-900 mb-3 group-hover:text-orange-600 transition-colors">
+                  <h3 className="text-xl font-bold text-stone-900 mb-3 group-hover:text-blue-600 transition-colors">
                     {title}
                   </h3>
 
