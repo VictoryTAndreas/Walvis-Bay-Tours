@@ -10,6 +10,7 @@ import { useAuth } from "../context/AuthContext";
 import { toast } from "react-toastify";
 import ClipLoader from "react-spinners/ClipLoader";
 import logo from "/src/assets/logo.png";
+import img7 from "../assets/img7.jpeg";
 
 
 const SignIn = () => {
@@ -62,7 +63,7 @@ const SignIn = () => {
       <div
         className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat bg-fixed"
         style={{
-          backgroundImage: `url('https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2021&q=80')`,
+          backgroundImage: logo,
         }}
       >
         <div className="absolute inset-0 bg-black/40 backdrop-blur-[2px]"></div>
