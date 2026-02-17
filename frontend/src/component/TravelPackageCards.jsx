@@ -334,7 +334,7 @@ const TravelPackageCards = () => {
               {/* Action Button */}
               <button
                 onClick={() => handleViewDetails(pkg)}
-                className="w-full py-3 bg-gradient-to-r from-blue-600 to-blue-600 hover:from-blue-400 hover:to-blue-400 text-white font-semibold rounded-2xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-emerald-500/25 border border-emerald-500/20"
+                className="w-full py-3 bg-gradient-to-r from-blue-600 to-blue-600 hover:from-blue-400 hover:to-blue-400 text-black font-semibold rounded-2xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-emerald-500/25 border border-emerald-500/20"
               >
                 View Details & Book
               </button>
@@ -517,7 +517,7 @@ const TravelPackageCards = () => {
                 
                 <button
                   onClick={handleBookNow}
-                  className="w-full py-4 bg-gradient-to-r from-blue-600 to-blue-600 hover:from-blue-400 hover:to-teal-500 text-white text-lg font-bold rounded-2xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-emerald-500/25"
+                  className="w-full py-4 bg-gradient-to-r from-blue-600 to-blue-600 hover:from-blue-400 hover:to-teal-500 text-black text-lg font-bold rounded-2xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-emerald-500/25"
                 >
                   Book This Package Now
                 </button>

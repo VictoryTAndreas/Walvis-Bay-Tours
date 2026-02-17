@@ -1,13 +1,120 @@
-import React, { useState } from "react";
-import { FaTimes, FaAward, FaUser, FaEnvelope, FaPhone, FaCalendar, FaUsers, FaComment } from "react-icons/fa";
+import React, { useState, useEffect } from "react";
+import { FaTimes, FaUser, FaEnvelope, FaPhone, FaCalendar, FaUsers, FaComment, FaBox } from "react-icons/fa";
+import { Star, MapPin, Clock, Users as LucideUsers, Award } from 'lucide-react';
 import emailjs from '@emailjs/browser';
 import logo from "/src/assets/logo.png";
-// Your EmailJS credentials (get these from your dashboard)
-const EMAILJS_SERVICE_ID = 'service_o3ejxng'; // Replace with your Service ID
-const EMAILJS_TEMPLATE_ID = 'template_uakit0e'; // Replace with your Template ID
-const EMAILJS_PUBLIC_KEY = 'pWuBuEqzbPQ8JJFQq'; // Replace with your Public Key
+
+// Your EmailJS credentials
+const EMAILJS_SERVICE_ID = 'service_o3ejxng';
+const EMAILJS_TEMPLATE_ID = 'template_uakit0e';
+const EMAILJS_PUBLIC_KEY = 'pWuBuEqzbPQ8JJFQq';
 const EMAILJS_CUSTOMER_TEMPLATE_ID = 'template_3z0fsfs';
-const BookingForm = ({ selectedPackage, onClose, onSubmit }) => {
+
+// Import the travel packages data (you can also pass this as a prop)
+const travelPackages = [
+  {
+    id: 1,
+    destination: "Walvis Bay, Namibia",
+    title: "Walvis Bay Boat Cruise",
+    price: 1400,
+    originalPrice: 0,
+    currency: "N$",
+    duration: "3 Hours",
+    groupSize: "2-12 People",
+    rating: 4.9,
+    reviews: 187,
+    departure: "Daily - Year Round",
+    includes: ["Light Lunch", "Fresh Oysters", "Champagne", "Wine & Beer", "Cooldrink", "Professional Guide"],
+    highlights: ["Dolphin Watching", "Pelican Encounter", "Cape Fur Seals", "Marine Life", "Scenic Bay Views", "Oyster Tasting"],
+    optionalExtras: ["Photography Package", "Sunset Cruise Add-on", "Private Charter"],
+    difficulty: "Easy",
+    category: "Marine & Luxury",
+    discount: 0,
+    featured: true,
+  },
+  {
+    id: 2,
+    destination: "Sandwich Harbour, Namibia",
+    title: "Sandwich Harbour 4X4 Tour",
+    price: 2800,
+    originalPrice: 0,
+    currency: "N$",
+    duration: "Half Day",
+    groupSize: "4-7 People",
+    rating: 4.8,
+    reviews: 203,
+    departure: "Daily - Year Round",
+    includes: [
+      "Experienced 4x4 Driving Guide", 
+      "Picnic in the Dunes", 
+      "Comfortable Transport", 
+      "Photo Stops", 
+      "Refreshments"
+    ],
+    highlights: [
+      "Sandwich Harbour Lagoon", 
+      "Dune Driving Experience", 
+      "Walvis Bay Wetlands", 
+      "Desert Adaptations", 
+      "Shipwreck Views",
+      "Flamingo Sightings"
+    ],
+    optionalExtras: [
+      "Breakfast Package", 
+      "Drone Photography", 
+      "Private Tour Upgrade",
+      "Sunset Option"
+    ],
+    difficulty: "Moderate",
+    category: "Adventure & Desert",
+    discount: 0,
+    featured: true,
+    note: "7-seater vehicles - never packed to full capacity for your comfort"
+  },
+  {
+    id: 3,
+    destination: "Walvis Bay, Namibia",
+    title: "Kayaking Adventure",
+    price: 1600,
+    originalPrice: 0,
+    currency: "N$",
+    duration: "Half Day",
+    groupSize: "2-8 People",
+    rating: 4.7,
+    reviews: 156,
+    departure: "Daily - Year Round",
+    includes: [
+      "Kayaking Equipment", 
+      "Professional Guide", 
+      "Safety Briefing", 
+      "Life Jackets", 
+      "Dry Bags",
+      "Wetsuit (if needed)"
+    ],
+    highlights: [
+      "Paddle with Cape Fur Seals", 
+      "Pelican Sightings", 
+      "Flamingo Viewing", 
+      "Oyster Farms Tour", 
+      "Marine Wildlife",
+      "Lagoon Scenery"
+    ],
+    optionalExtras: [
+      "Underwater Camera Hire", 
+      "Photography Package", 
+      "Breakfast Add-on",
+      "Private Guide"
+    ],
+    difficulty: "Easy",
+    category: "Adventure & Marine",
+    discount: 0,
+    featured: false,
+    note: "No experience needed - suitable for beginners"
+  },
+];
+
+const BookingForm = ({ selectedPackage: initialPackage, onClose, onSubmit }) => {
+  const [selectedPkg, setSelectedPkg] = useState(initialPackage || null);
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
@@ -17,6 +124,13 @@ const BookingForm = ({ selectedPackage, onClose, onSubmit }) => {
     specialRequests: ""
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // Handle package selection from dropdown
+  const handlePackageChange = (e) => {
+    const packageId = parseInt(e.target.value);
+    const pkg = travelPackages.find(p => p.id === packageId);
+    setSelectedPkg(pkg);
+  };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -38,14 +152,18 @@ const BookingForm = ({ selectedPackage, onClose, onSubmit }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    if (!selectedPkg) {
+      alert('Please select a package');
+      return;
+    }
+    
     setIsSubmitting(true);
 
     try {
-      // Calculate total price
       const participantsCount = parseInt(formData.participants);
-      const totalPrice = selectedPackage.newPrice * participantsCount;
+      const totalPrice = selectedPkg.price * participantsCount;
       
-      // Get current date and time
       const now = new Date();
       const bookingDate = now.toLocaleDateString('en-US', { 
         year: 'numeric', 
@@ -58,37 +176,27 @@ const BookingForm = ({ selectedPackage, onClose, onSubmit }) => {
         hour12: true 
       });
 
-      // Generate booking reference
       const bookingReference = generateBookingReference();
 
-      // Prepare email parameters with ALL details
       const templateParams = {
-        // Your name (from EmailJS template)
-        name: "Admin", // This can be dynamic if you want
-        
-        // Customer details
+        name: "Admin",
         customer_name: formData.fullName,
         customer_email: formData.email,
         customer_phone: formData.phone,
-        
-        // Package details
-        package_name: selectedPackage.title,
-        location: selectedPackage.location,
-        price_per_person: selectedPackage.newPrice,
+        package_name: selectedPkg.title,
+        location: selectedPkg.destination,
+        price_per_person: selectedPkg.price,
         participants: formData.participants,
         total_price: totalPrice,
         date: formData.date,
-        
-        // Special requests
         special_requests: formData.specialRequests || 'No special requests',
-        
-        // Booking metadata
         booking_reference: bookingReference,
         booking_date: bookingDate,
-        booking_time: bookingTime
+        booking_time: bookingTime,
+        duration: selectedPkg.duration,
+        difficulty: selectedPkg.difficulty
       };
 
-      // Send email notification
       await emailjs.send(
         EMAILJS_SERVICE_ID,
         EMAILJS_TEMPLATE_ID,
@@ -102,28 +210,27 @@ const BookingForm = ({ selectedPackage, onClose, onSubmit }) => {
         templateParams,
         EMAILJS_PUBLIC_KEY
       );
-      // Show success message
+      
       alert(`Booking confirmed! Your reference number is ${bookingReference}. We will contact you soon.`);
       
-      // Call the parent onSubmit handler
       onSubmit(formData);
+      onClose();
       
     } catch (error) {
       console.error('EmailJS error:', error);
-      alert('There was an error sending your booking. Please try again or contact us directly.');
+      alert('If you did not recieve confirmation email. Please try again or contact us directly (0812664189).');
     } finally {
       setIsSubmitting(false);
     }
   };
 
-  // Get tomorrow's date for min date in date picker
   const tomorrow = new Date();
   tomorrow.setDate(tomorrow.getDate() + 1);
   const minDate = tomorrow.toISOString().split('T')[0];
 
   return (
-    <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-      <div className="bg-gradient-to-b from-stone-800 to-stone-900 rounded-3xl shadow-2xl w-full max-w-2xl relative overflow-y-auto max-h-[90vh] border border-blue-500/30">
+    <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 p-4 overflow-y-auto">
+      <div className="bg-gradient-to-b from-stone-800 to-stone-900 rounded-3xl shadow-2xl w-full max-w-2xl relative border border-blue-500/30 my-8">
         
         {/* Close Button */}
         <button
@@ -137,40 +244,80 @@ const BookingForm = ({ selectedPackage, onClose, onSubmit }) => {
         {/* Form Header */}
         <div className="relative h-32 bg-gradient-to-r from-blue-600 to-amber-600 p-6">
           <h2 className="text-2xl font-bold text-white mb-1">Book Your Adventure</h2>
-          <p className="text-blue-100">{selectedPackage.title}</p>
-          <div className="w-10 h-10 p-1 bg-white rounded-xl flex items-center justify-center 
-                group-hover:rotate-12 transition-transform duration-300">
-  <img 
-    src={logo}
-    alt="Walvis Bay Tours Logo"
-    className="w-full h-full object-cover rounded-lg"
-  />
-</div>
-
+          <p className="text-blue-100">Fill in your details to confirm booking</p>
+          <div className="absolute top-4 right-16 w-12 h-12 p-2 bg-white rounded-xl flex items-center justify-center shadow-lg">
+            <img 
+              src={logo}
+              alt="Walvis Bay Tours Logo"
+              className="w-full h-full object-cover rounded-lg"
+            />
+          </div>
         </div>
 
         {/* Form Body */}
-        <div className="p-6 pt-10">
-          {/* Package Summary */}
-          <div className="bg-white/5 rounded-xl p-4 mb-6 border border-white/10">
-            <div className="flex justify-between items-center">
-              <div>
-                <p className="text-sm text-gray-400">Selected Package</p>
-                <p className="font-semibold text-white">{selectedPackage.title}</p>
-                <p className="text-xs text-gray-400">{selectedPackage.location}</p>
+        <div className="p-6">
+          {/* Package Selection Dropdown - Show if no package selected */}
+          {!initialPackage && (
+            <div className="mb-6">
+              <label className="block text-sm font-medium text-gray-300 mb-2">
+                <FaBox className="inline mr-2 text-blue-400" />
+                Select Package *
+              </label>
+              <select
+                onChange={handlePackageChange}
+                value={selectedPkg?.id || ""}
+                required
+                className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition"
+              >
+                <option value="" className="bg-stone-800">-- Choose a package --</option>
+                {travelPackages.map((pkg) => (
+                  <option key={pkg.id} value={pkg.id} className="bg-stone-800">
+                    {pkg.title} - {pkg.currency}{pkg.price} ({pkg.duration})
+                  </option>
+                ))}
+              </select>
+            </div>
+          )}
+
+          {/* Selected Package Summary - Only show if package is selected */}
+          {selectedPkg && (
+            <div className="bg-gradient-to-r from-blue-500/20 to-amber-500/20 rounded-xl p-4 mb-6 border border-blue-500/30">
+              <div className="flex justify-between items-start mb-2">
+                <div>
+                  <p className="text-sm text-gray-400">Selected Package</p>
+                  <p className="font-semibold text-white text-lg">{selectedPkg.title}</p>
+                  <div className="flex items-center gap-2 mt-1">
+                    <MapPin className="w-3 h-3 text-blue-400" />
+                    <p className="text-xs text-gray-300">{selectedPkg.destination}</p>
+                  </div>
+                </div>
+                {selectedPkg.featured && (
+                  <div className="px-2 py-1 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-full text-xs font-bold text-white flex items-center gap-1">
+                    <Award className="w-3 h-3" />
+                    FEATURED
+                  </div>
+                )}
               </div>
-              <div className="text-right">
-                <p className="text-sm text-gray-400">Price</p>
-                <p className="text-xl font-bold text-blue-400">N${selectedPackage.newPrice}</p>
-                <p className="text-xs text-gray-400">per person</p>
+              
+              <div className="grid grid-cols-3 gap-2 mt-3 pt-3 border-t border-white/10">
+                <div className="text-center">
+                  <Clock className="w-4 h-4 text-blue-400 mx-auto mb-1" />
+                  <p className="text-xs text-gray-400">Duration</p>
+                  <p className="text-sm font-medium text-white">{selectedPkg.duration}</p>
+                </div>
+                <div className="text-center">
+                  <LucideUsers className="w-4 h-4 text-amber-400 mx-auto mb-1" />
+                  <p className="text-xs text-gray-400">Group</p>
+                  <p className="text-sm font-medium text-white">{selectedPkg.groupSize}</p>
+                </div>
+                <div className="text-center">
+                  <Star className="w-4 h-4 text-yellow-400 mx-auto mb-1 fill-current" />
+                  <p className="text-xs text-gray-400">Rating</p>
+                  <p className="text-sm font-medium text-white">{selectedPkg.rating}</p>
+                </div>
               </div>
             </div>
-            {selectedPackage.note && (
-              <p className="text-xs text-blue-300 mt-2 italic border-t border-white/10 pt-2">
-                {selectedPackage.note}
-              </p>
-            )}
-          </div>
+          )}
 
           <form onSubmit={handleSubmit} className="space-y-4">
             {/* Full Name */}
@@ -287,18 +434,25 @@ const BookingForm = ({ selectedPackage, onClose, onSubmit }) => {
               ></textarea>
             </div>
 
-            {/* Total Price Calculation */}
-            <div className="bg-gradient-to-r from-blue-500/20 to-amber-500/20 rounded-xl p-4 border border-blue-500/30">
-              <div className="flex justify-between items-center">
-                <span className="text-gray-300">Total Price:</span>
-                <span className="text-2xl font-bold text-blue-400">
-                  N${(selectedPackage.newPrice * parseInt(formData.participants || 1)).toLocaleString()}
-                </span>
+            {/* Total Price Calculation - Only show if package selected */}
+            {selectedPkg && (
+              <div className="bg-gradient-to-r from-blue-500/20 to-amber-500/20 rounded-xl p-4 border border-blue-500/30">
+                <div className="flex justify-between items-center">
+                  <span className="text-gray-300">Total Price:</span>
+                  <span className="text-2xl font-bold text-blue-400">
+                    N${(selectedPkg.price * parseInt(formData.participants || 1)).toLocaleString()}
+                  </span>
+                </div>
+                <p className="text-xs text-gray-400 mt-1">
+                  For {formData.participants} {parseInt(formData.participants) === 1 ? 'person' : 'people'}
+                </p>
+                {selectedPkg.note && (
+                  <p className="text-xs text-amber-400 mt-2 italic border-t border-white/10 pt-2">
+                    {selectedPkg.note}
+                  </p>
+                )}
               </div>
-              <p className="text-xs text-gray-400 mt-1">
-                For {formData.participants} {parseInt(formData.participants) === 1 ? 'person' : 'people'}
-              </p>
-            </div>
+            )}
 
             {/* Form Actions */}
             <div className="flex gap-3 pt-4">
@@ -312,7 +466,7 @@ const BookingForm = ({ selectedPackage, onClose, onSubmit }) => {
               </button>
               <button
                 type="submit"
-                disabled={isSubmitting}
+                disabled={isSubmitting || !selectedPkg}
                 className="flex-1 px-6 py-3 bg-gradient-to-r from-blue-600 to-amber-600 hover:from-blue-500 hover:to-amber-500 text-white font-semibold rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg disabled:opacity-50 disabled:hover:scale-100"
               >
                 {isSubmitting ? 'Sending...' : 'Confirm Booking'}

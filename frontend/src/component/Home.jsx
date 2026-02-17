@@ -15,6 +15,7 @@ import "swiper/css/navigation";
 import img7 from "../assets/img7.jpeg";
 import bgV from "../assets/bgV.mp4";
 import { Link } from "react-router-dom";
+import BookingForm from "./BookingForm";
 
 const Home = () => {
   const [ref, isVisible] = useInView({ threshold: 0.2 });
@@ -87,10 +88,10 @@ const Home = () => {
               unforgettable adventures across Namibia!
             </p>
             <Link
-              to={"/signin"}
+              to={"/bookingform"}
               className="px-8 py-3 sm:px-10 sm:py-4 border border-white text-white font-semibold rounded-full bg-stone-950/30 backdrop-blur-md hover:bg-white hover:text-stone-900 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
             >
-              Get Started
+              BOOK NOW!
             </Link>
           </div>
         </div>

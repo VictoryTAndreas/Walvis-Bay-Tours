@@ -18,6 +18,7 @@ import MainLayout from "./component/MainLayout";
 import ChatPage from "./component/Chat/ChatPage";
 import { CreateTrip } from "./component/CreateTrip";
 import { EditProfile } from "./component/EditProfle";
+import BookingForm from "./component/BookingForm";
 
 function App() {
   return (
@@ -28,6 +29,10 @@ function App() {
       <Routes>
         <Route path="/signin" element={<SignIn />} />
         <Route path="/signup" element={<SignUp />} />
+        
+        {/* Add this new booking route - outside MainLayout for clean mobile experience */}
+        <Route path="/bookingform" element={<BookingForm />} />
+        
         <Route path="/" element={<MainLayout />}>
           <Route path="/" element={<Home />} />
           <Route path="/find-travel-mate" element={<FindTravelMate />} />
@@ -47,7 +52,6 @@ function App() {
           <Route path="settings" element={<Settings />} />
         </Route>
       </Routes>
-
     </>
   );
 }
