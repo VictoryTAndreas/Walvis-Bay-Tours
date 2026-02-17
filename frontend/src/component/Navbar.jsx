@@ -68,7 +68,7 @@ const Navbar = () => {
             { to: "/experience", label: "PACKAGES" },
             { to: "/#", label: "EXPLORE" },
             { to: "/offers", label: "PROMOTIONS" },
-            { to: "/find-travel-mate", label: "Find Travel Mate" },
+            { to: "/bookingform", label: "BOOK" },
           ].map(({ to, label }) => (
             <Link
               key={to}
@@ -134,7 +134,7 @@ const Navbar = () => {
             { to: "/experience", label: "PACKAGES" },
             { to: "/#", label: "EXPLORE" },
             { to: "/offers", label: "PROMOTIONS" },
-            { to: "/find-travel-mate", label: "Find Travel Mate" },
+            { to: "/bookingform", label: "BOOK" },
           ].map(({ to, label }) => (
             <Link
               key={to}
