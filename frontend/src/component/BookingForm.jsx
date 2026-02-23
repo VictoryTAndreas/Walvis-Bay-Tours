@@ -5,10 +5,10 @@ import emailjs from '@emailjs/browser';
 import logo from "/src/assets/logo.png";
 
 // Your EmailJS credentials
-const EMAILJS_SERVICE_ID = 'service_o3ejxng';
-const EMAILJS_TEMPLATE_ID = 'template_uakit0e';
-const EMAILJS_PUBLIC_KEY = 'pWuBuEqzbPQ8JJFQq';
-const EMAILJS_CUSTOMER_TEMPLATE_ID = 'template_3z0fsfs';
+const EMAILJS_SERVICE_ID = 'service_y0rshtg';
+const EMAILJS_TEMPLATE_ID = 'template_myc0dcq';
+const EMAILJS_PUBLIC_KEY = 'jmk1IA_9jKIQ6CV9c';
+const EMAILJS_CUSTOMER_TEMPLATE_ID = 'template_fpr96gg';
 
 // Import the travel packages data (you can also pass this as a prop)
 const travelPackages = [
